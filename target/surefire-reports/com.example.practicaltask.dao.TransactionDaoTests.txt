@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.example.practicaltask.dao.TransactionDaoTests
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.623 s <<< FAILURE! - in com.example.practicaltask.dao.TransactionDaoTests
+testGetAllProductsByUserId  Time elapsed: 0.069 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.size()" because "products" is null
+	at com.example.practicaltask.dao.TransactionDaoTests.testGetAllProductsByUserId(TransactionDaoTests.java:52)
+
+testGetAllUsersByProductId  Time elapsed: 0.037 s  <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.size()" because "users" is null
+	at com.example.practicaltask.dao.TransactionDaoTests.testGetAllUsersByProductId(TransactionDaoTests.java:70)
+
