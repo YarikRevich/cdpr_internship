@@ -57,6 +57,7 @@ public class UserDAO {
      * Saves new user to user repository
      */
     public void createUser(User user){
+        userRepository.
         userRepository.save(user);
     }
 

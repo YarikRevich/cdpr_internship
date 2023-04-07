@@ -20,11 +20,11 @@ import com.example.practicaltask.service.GameService;
 @RestController
 public class GameController {
     @Autowired
-    private GameService productService;
+    private GameService gameService;
 
     @PostMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void create(@RequestBody Game product){
-        productService.createProduct(product); 
+    public ResponseEntity<Long> create(@RequestBody Game product){
+        this.gameService.create(product); 
     }
 
     @GetMapping(value = "v1/game/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

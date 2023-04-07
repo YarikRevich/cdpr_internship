@@ -7,8 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.*;
 
 import com.example.practicaltask.entity.User;
-import com.example.practicaltask.dao.UserDao;
-import com.example.practicaltask.dao.ProductDao;
+import com.example.practicaltask.dao.UserDAO;
+import com.example.practicaltask.dao.ProductDAO;
 import com.example.practicaltask.util.dataloader.DataLoader;
 
 import org.springframework.context.annotation.Import;
@@ -18,11 +18,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 /**
  * Unit tests for UserDao
  */
-@Import({DataLoader.class, ProductDao.class, UserDao.class})
+@Import({DataLoader.class, ProductDAO.class, UserDAO.class})
 @DataJpaTest
 public class UserDaoTests {
     @Autowired
-    private UserDao userDao;
+    private UserDAO userDao;
 
     @BeforeEach
     public void setUp() throws Exception{

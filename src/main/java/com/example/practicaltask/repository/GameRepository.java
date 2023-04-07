@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface GameRepository extends JpaRepository<Game, Long> {
     public Game findById(long id);
     public boolean existsById(long id);
+    public boolean existsByName(String name);
 }

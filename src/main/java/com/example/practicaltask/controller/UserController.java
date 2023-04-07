@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping(value = "v1/users/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<ArrayList<User>> get(){
+    public @ResponseBody ResponseEntity<List<User>> get(){
         return ResponseEntity.status(HttpStatus.BAD_REQUEST);
         // return userService.get();
     }
