@@ -7,11 +7,11 @@
 		<version>2.7.2</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>practicaltask</artifactId>
+	<groupId>com</groupId>
+	<artifactId>gamestore</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>practicaltask</name>
-	<description>Practical task for internship in Intellias</description>
+	<name>gamestore</name>
+	<description>Game store application</description>
 	<properties>
 		<repackage.classifier />
 		<java.version>17</java.version>
@@ -21,7 +21,6 @@
 	</properties>
 
 	<dependencies>
-		<!-- Dependencies for SpringBoot -->
 		<dependency>
 			<groupId>org.springframework.experimental</groupId>
 			<artifactId>spring-native</artifactId>
@@ -44,22 +43,22 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+			<version>2.0.0-rc2</version>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>1.18.26</version>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- Dependencies for H2 -->
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
-		<!-- Dependencies for tests -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -173,5 +172,4 @@
 			</build>
 		</profile>
 	</profiles>
-
 </project>
