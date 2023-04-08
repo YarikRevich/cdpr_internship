@@ -11,9 +11,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @Repository
 public interface GameRepository extends JpaRepository<Game, Long> {
     public Game findById(long id);
-    public Game findByName(String name);
-    public Game findByGenres(List<Genre> genres);
-
     public boolean existsById(long id);
+
+    public Game findByName(String name);
     public boolean existsByName(String name);
+    
+    public List<Game> findAllByGenres(List<Genre> genres);
+
+    public List<Game> findAllByPriceGreaterThan(int price);
+    public List<Game> findAllByPriceLowerThan(int price);
+
+    public List<Game> findAllByAvailableQuantityNotNull(int price);
 }
