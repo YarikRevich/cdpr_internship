@@ -40,7 +40,7 @@ public class OrderDAO {
         if (userRepository.existsById(id)){
             user = userRepository.getReferenceById(id);
         } else {
-            throw new UserNotFoundException();
+            throw new NotFoundException();
         }
         ArrayList<Game> products = new ArrayList<>();
 
@@ -79,7 +79,7 @@ public class OrderDAO {
         if (userRepository.existsById(userId)){
             user = userRepository.getById(userId);
         } else {
-            throw new UserNotFoundException();
+            throw new NotFoundException();
         }
         Game product = null;
         if (productRepository.existsById(productId)){

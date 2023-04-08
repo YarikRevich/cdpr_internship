@@ -13,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-@Table(name = "users", uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
+@Table(name = "users", uniqueConstraints={@UniqueConstraint(columnNames={"email", "password"})})
 public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,9 @@ public class User implements Serializable{
 
     @NonNull
     private String email;
+
+    @NonNull
+    private String password;
 
     public long getId() {
         return this.id;
@@ -58,5 +61,13 @@ public class User implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

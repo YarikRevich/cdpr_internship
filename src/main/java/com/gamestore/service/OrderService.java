@@ -12,19 +12,10 @@ import com.gamestore.entity.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Services, which are used in "transactions" scope
- */
 @Service
 public class OrderService {
     @Autowired
-    private OrderDAO transactionDao;
-
-    @Autowired
-    private UserDAO userDao;
-
-    @Autowired
-    private ProductDAO productDao;
+    private OrderDAO orderDao;
 
     public ArrayList<Game> getAllProductsByUserId(long id) throws Exception {
         return transactionDao.getAllProductsByUserId(id);

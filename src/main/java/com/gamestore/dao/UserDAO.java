@@ -10,9 +10,6 @@ import org.springframework.data.domain.Sort;
 
 import org.springframework.stereotype.Service;
 
-/**
- * Dao service which interects with user repository
- */
 @Service
 public class UserDAO {
     @Autowired
@@ -27,11 +24,19 @@ public class UserDAO {
         return userRepository.findById(id);
     }
 
+    public boolean existsById(long id) throws EntityNotFoundException{
+        return userRepository.existsById(id);
+    };
+
+    public boolean existsByEmail(String email) throws EntityNotFoundException{
+        return userRepository.existsByEmail(email);
+    }
+
     public List<User> getAll() {
         return userRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
     
-    public void delete(long id) throws Exception{
+    public void delete(long id) {
         this.userRepository.deleteById(id);
     }
 }

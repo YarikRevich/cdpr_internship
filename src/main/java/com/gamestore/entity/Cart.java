@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.CascadeType;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "carts")
@@ -27,7 +28,7 @@ public class Cart implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "games_id")
-    private Game game;
+    private List<Game> games;
 
     @NonNull
     private int quantity;
@@ -40,11 +41,11 @@ public class Cart implements Serializable {
         this.id = id;
     }
 
-    public Game getGame() {
-        return this.game;
+    public List<Game> getGame() {
+        return this.games;
     }
 
-    public void setGame(Game game) {
+    public void setGame(List<Game> game) {
         this.game = game;
     }
 
