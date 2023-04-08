@@ -1,4 +1,4 @@
-package com.example.practicaltask.util.exception;
+package com.gamestore.util.exception;
 
 public class NotEnoughMoneyToBuyProductException extends Exception {
     public NotEnoughMoneyToBuyProductException(){

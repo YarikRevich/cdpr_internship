@@ -1,4 +1,4 @@
-package com.example.practicaltask.dao;
+package com.gamestore.dao;
 
 public class GenreDAO {
     

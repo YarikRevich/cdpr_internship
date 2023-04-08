@@ -1,4 +1,4 @@
-package com.example.practicaltask.entity;
+package com.gamestore.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

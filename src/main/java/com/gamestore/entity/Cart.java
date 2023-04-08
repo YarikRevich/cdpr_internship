@@ -1,11 +1,13 @@
-package com.example.practicaltask.entity;
+package com.gamestore.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import io.micrometer.core.lang.NonNull;
+
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.CascadeType;
@@ -23,8 +25,11 @@ public class Cart implements Serializable {
     @JoinColumn(name = "users_id")
     private User user;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "games_id")
     private Game game;
 
+    @NonNull
     private int quantity;
 
     public long getId() {

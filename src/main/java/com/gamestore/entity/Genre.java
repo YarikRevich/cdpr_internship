@@ -1,19 +1,23 @@
-package com.example.practicaltask.entity;
+package com.gamestore.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+
+import io.micrometer.core.lang.NonNull;
+
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 
 import java.io.Serializable;
 
 @Entity
-@Table(name = "genres")
+@Table(name = "genres", uniqueConstraints={@UniqueConstraint(columnNames={"name"})})
 public class Genre implements Serializable{
     @Id
     @GeneratedValue
     private long id;
 
+    @NonNull
     private String name;
 
     public long getId() {
@@ -28,7 +32,7 @@ public class Genre implements Serializable{
         return this.name;
     }
 
-    public void setCart(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 }

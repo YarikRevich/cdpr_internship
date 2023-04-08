@@ -1,7 +1,7 @@
-package com.example.practicaltask.repository;
+package com.gamestore.repository;
 
 import org.springframework.stereotype.Repository;
-import com.example.practicaltask.entity.Game;
+import com.gamestore.entity.Game;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Repository

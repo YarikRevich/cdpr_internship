@@ -1,14 +1,13 @@
-package com.example.practicaltask.service;
+package com.gamestore.service;
 
 import java.util.ArrayList;
-import com.example.practicaltask.dao.OrderDAO;
-import com.example.practicaltask.dao.UserDAO;
-import com.example.practicaltask.dao.ProductDAO;
-
-import com.example.practicaltask.entity.Game;
-import com.example.practicaltask.entity.User;
-import com.example.practicaltask.entity.Order;
-import com.example.practicaltask.entity.dto.BuyProductWrapper;
+import com.gamestore.dao.OrderDAO;
+import com.gamestore.dao.UserDAO;
+import com.gamestore.entity.Game;
+import com.gamestore.entity.User;
+import com.gamestore.practicaltask.dao.ProductDAO;
+import com.gamestore.practicaltask.entity.dto.BuyProductWrapper;
+import com.gamestore.entity.Order;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class OrderService {
 
     @Autowired
     private ProductDAO productDao;
-    
+
     public ArrayList<Game> getAllProductsByUserId(long id) throws Exception {
         return transactionDao.getAllProductsByUserId(id);
     }

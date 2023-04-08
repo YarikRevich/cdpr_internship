@@ -1,7 +1,11 @@
-package com.example.practicaltask.entity;
+package com.gamestore.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import org.springframework.lang.NonNull;
+
 import javax.persistence.Id;
 
 import java.io.Serializable;
@@ -9,14 +13,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
 public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NonNull
     private String firstName;
+
+    @NonNull
     private String lastName;
-    private int moneyAmount;
+
+    @NonNull
+    private String email;
 
     public long getId() {
         return this.id;
@@ -42,11 +52,11 @@ public class User implements Serializable{
         this.lastName = lastName;
     }
 
-    public int getMoneyAmount() {
-        return this.moneyAmount;
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setMoneyAmount(int moneyAmount) {
-        this.moneyAmount = moneyAmount;
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

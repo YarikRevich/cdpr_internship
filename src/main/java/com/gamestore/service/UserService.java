@@ -1,10 +1,10 @@
-package com.example.practicaltask.service;
+package com.gamestore.service;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-import com.example.practicaltask.dao.UserDao;
-import com.example.practicaltask.entity.User;
+import com.gamestore.dao.UserDAO;
+import com.gamestore.entity.User;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Service
 public class UserService {
     @Autowired
-    private UserDao userDao;
+    private UserDAO userDao;
 
     /**
      * Creates certain user

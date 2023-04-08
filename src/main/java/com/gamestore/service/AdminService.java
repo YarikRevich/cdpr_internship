@@ -1,4 +1,4 @@
-package com.example.practicaltask.service;
+package com.gamestore.service;
 
 public class AdminService {
     

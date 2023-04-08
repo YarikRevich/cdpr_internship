@@ -1,14 +1,14 @@
-package com.example.practicaltask.dao;
+package com.gamestore.dao;
 
 import java.util.ArrayList;
 import java.util.Optional;
 
-import com.example.practicaltask.entity.Game;
-import com.example.practicaltask.repository.AdminRepository;
-import com.example.practicaltask.repository.GameRepository;
+import com.gamestore.entity.Game;
+import com.gamestore.repository.AdminRepository;
+import com.gamestore.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.practicaltask.util.exception.ProductNotFoundException;
+import com.gamestore.util.exception.ProductNotFoundException;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;

@@ -1,16 +1,16 @@
-package com.example.practicaltask.dao;
+package com.gamestore.dao;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.Assert.*;
 
-import com.example.practicaltask.entity.Product;
-import com.example.practicaltask.entity.User;
-import com.example.practicaltask.dao.UserDao;
-import com.example.practicaltask.dao.ProductDao;
-import com.example.practicaltask.dao.TransactionDao;
-import com.example.practicaltask.util.dataloader.DataLoader;
+import com.gamestore.entity.Game;
+import com.gamestore.entity.User;
+import com.gamestore.practicaltask.dao.ProductDAO;
+import com.gamestore.practicaltask.util.dataloader.DataLoader;
+import com.gamestore.dao.UserDAO;
+import com.gamestore.dao.OrderDAO;
 
 import org.springframework.context.annotation.Import;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +19,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 /**
  * Unit tests for TransactionDao
  */
-@Import({DataLoader.class, ProductDao.class, UserDao.class, TransactionDao.class})
+@Import({DataLoader.class, ProductDAO.class, UserDAO.class, OrderDAO.class})
 @DataJpaTest
 public class TransactionDaoTests {
     @Autowired
-    private TransactionDao transactionDao;
+    private OrderDAO transactionDao;
 
     @Test
     public void testCreateTransaction(){
@@ -43,7 +43,7 @@ public class TransactionDaoTests {
         }
 
 
-        ArrayList<Product> products = null;
+        ArrayList<Game> products = null;
         try{
             products = transactionDao.getAllProductsByUserId(1);
         } catch (Exception e){

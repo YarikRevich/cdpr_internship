@@ -1,22 +1,22 @@
-package com.example.practicaltask.dao;
+package com.gamestore.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.practicaltask.repository.UserRepository;
-import com.example.practicaltask.repository.GameRepository;
-import com.example.practicaltask.repository.OrderRepository;
+import com.gamestore.repository.UserRepository;
+import com.gamestore.repository.GameRepository;
+import com.gamestore.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
-import com.example.practicaltask.util.exception.NotEnoughMoneyToBuyProductException;
-import com.example.practicaltask.util.exception.ProductNotFoundException;
-import com.example.practicaltask.util.exception.UserNotFoundException;
+import com.gamestore.util.exception.NotEnoughMoneyToBuyProductException;
+import com.gamestore.util.exception.ProductNotFoundException;
+import com.gamestore.util.exception.UserNotFoundException;
 
-import com.example.practicaltask.entity.User;
-import com.example.practicaltask.entity.Game;
-import com.example.practicaltask.entity.Order;
+import com.gamestore.entity.User;
+import com.gamestore.entity.Game;
+import com.gamestore.entity.Order;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;

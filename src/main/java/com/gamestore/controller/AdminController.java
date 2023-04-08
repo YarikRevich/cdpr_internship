@@ -1,6 +1,6 @@
-package com.example.practicaltask.controller;
+package com.gamestore.controller;
 
-package com.example.practicaltask.controller;
+package com.gamestore.controller;
 
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,8 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
-import com.example.practicaltask.entity.User;
-import com.example.practicaltask.service.UserService;
+import com.gamestore.entity.User;
+import com.gamestore.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,12 +24,12 @@ public class AdminController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Long> create(@RequestBody User user){
         // userService.create(user);
     }
 
-    @GetMapping(value = "v1/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "v1/admin/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<User> get(@PathVariable long id){
         // return new User();
     }

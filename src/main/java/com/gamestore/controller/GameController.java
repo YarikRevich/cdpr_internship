@@ -1,4 +1,4 @@
-package com.example.practicaltask.controller;
+package com.gamestore.controller;
 
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.MediaType;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.practicaltask.entity.Game;
-import com.example.practicaltask.service.GameService;
+import com.gamestore.entity.Game;
+import com.gamestore.service.GameService;
 
 @RestController
 public class GameController {
@@ -24,7 +24,7 @@ public class GameController {
 
     @PostMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Long> create(@RequestBody Game product){
-        this.gameService.create(product); 
+        return this.gameService.create(product); 
     }
 
     @GetMapping(value = "v1/game/{id}", produces = MediaType.APPLICATION_JSON_VALUE)

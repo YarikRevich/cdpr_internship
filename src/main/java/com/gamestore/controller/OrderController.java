@@ -1,4 +1,4 @@
-package com.example.practicaltask.controller;
+package com.gamestore.controller;
 
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.HttpStatus;
 
-import com.example.practicaltask.entity.Game;
-import com.example.practicaltask.entity.User;
-import com.example.practicaltask.entity.wrapper.BuyProductWrapper;
-
-import com.example.practicaltask.service.OrderService;
-
+import com.gamestore.entity.Game;
+import com.gamestore.entity.User;
+import com.gamestore.service.OrderService;
+import com.gamestore.practicaltask.entity.wrapper.BuyProductWrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

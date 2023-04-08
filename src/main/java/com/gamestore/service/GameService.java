@@ -1,10 +1,10 @@
-package com.example.practicaltask.service;
+package com.gamestore.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.practicaltask.dao.GameDAO;
-import com.example.practicaltask.entity.Game;
+import com.gamestore.dao.GameDAO;
+import com.gamestore.entity.Game;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;

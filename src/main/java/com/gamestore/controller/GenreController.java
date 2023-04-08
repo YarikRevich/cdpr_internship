@@ -1,4 +1,4 @@
-package com.example.practicaltask.controller;
+package com.gamestore.controller;
 
 import java.util.ArrayList;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,34 +11,35 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.MediaType;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.example.practicaltask.entity.Game;
-import com.example.practicaltask.service.ProductService;
+import com.gamestore.entity.Game;
+import com.gamestore.service.GameService;
+import com.gamestore.service.GenreService;
 
 @RestController
 public class GenreController {
     @Autowired
-    private ProductService productService;
+    private GenreService genreService;
 
     @PostMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void create(@RequestBody Game product){
-        productService.createProduct(product); 
+    public ResponseEntity<Long> create(@RequestBody Game product){
+        return genreService.create(product); 
     }
 
     @GetMapping(value = "v1/genre/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Game get(@PathVariable long id){
-        return new Game();
+        return genreService.get(product); 
     }
 
     @GetMapping(value = "v1/genres", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ArrayList<Game> get(){
-        return productService.getAllProducts();
+        return genreService.getAllProducts();
     }
 
     @DeleteMapping(value = "v1/genre/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public void delete(@PathVariable long id) throws Exception{
-        productService.deleteProduct(id); 
+        genreService.deleteProduct(id); 
     }
 }

@@ -1,4 +1,4 @@
-package com.example.practicaltask.dao;
+package com.gamestore.dao;
 
 import java.util.ArrayList;
 
@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.*;
 
-import com.example.practicaltask.entity.User;
-import com.example.practicaltask.dao.UserDAO;
-import com.example.practicaltask.dao.ProductDAO;
-import com.example.practicaltask.util.dataloader.DataLoader;
+import com.gamestore.entity.User;
+import com.gamestore.practicaltask.dao.ProductDAO;
+import com.gamestore.practicaltask.util.dataloader.DataLoader;
+import com.gamestore.dao.UserDAO;
 
 import org.springframework.context.annotation.Import;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,11 +1,11 @@
-package com.example.practicaltask.util.advice;
+package com.gamestore.util.advice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import com.example.practicaltask.util.exception.ProductNotFoundException;
+import com.gamestore.util.exception.ProductNotFoundException;
 
 @ControllerAdvice
 public class ProductNotFoundAdvice {
