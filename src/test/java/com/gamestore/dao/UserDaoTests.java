@@ -20,7 +20,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
  */
 @Import({DataLoader.class, ProductDAO.class, UserDAO.class})
 @DataJpaTest
-public class UserDaoTests {
+public class UserDAOTests {
     @Autowired
     private UserDAO userDao;
 

@@ -1,6 +1,7 @@
 package com.gamestore.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import com.gamestore.dao.UserDAO;
@@ -9,35 +10,29 @@ import com.gamestore.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Services, which are used in "users" scope
- */
 @Service
 public class UserService {
     @Autowired
     private UserDAO userDao;
 
-    /**
-     * Creates certain user
-     * @param user the model used to create the user
-     */
-    public void create(User user){
-        userDao.createUser(user);
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
     }
 
-    /**
-     * Lists all the existing users
-     * @return list of all the existing users
-     */
-    public ArrayList<User> get(){
-        return userDao.getAllUsers();
+    public long create(User user) throws Exception {
+        return this.userDao.save(user);
     }
 
-    /**
-     * Deletes certain user
-     * @param id the id of the user to be deleted
-     */
-    public void delete(long id) throws Exception{
-        userDao.deleteUser(id);
+    public User get(long id) throws Exception {
+        return this.userDao.getById(id);
+    }
+
+    public List<User> getAll(){
+        return this.userDao.getAll();
+    }
+
+    public void delete(long id) throws Exception {
+        this.userDao.delete(id);
     } 
 }

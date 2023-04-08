@@ -27,6 +27,6 @@ public class GameService {
     }
 
     public void delete(long id) throws Exception{
-        return this.gameDao.delete(id);
+        this.gameDao.delete(id);
     }
 }
