@@ -1,19 +1,20 @@
-package com.gamestore.util.advice;
+package com.gamestore.advice;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import com.gamestore.util.exception.NotEnoughMoneyToBuyProductException;
+import com.gamestore.exception.UserNotFoundException;
 
 @ControllerAdvice
-public class NotEnoughMoneyToBuyProductAdvice {
-
+public class DataValidationAdvice {
     @ResponseBody
-    @ExceptionHandler(NotEnoughMoneyToBuyProductException.class)
+    @ExceptionHandler(UserNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    String notEnoughMoneyToBuyProductHandler(NotEnoughMoneyToBuyProductException ex) {
+    String handleUserNotFound(UserNotFoundException ex) {
       return ex.getMessage();
     }
+
+    
 }

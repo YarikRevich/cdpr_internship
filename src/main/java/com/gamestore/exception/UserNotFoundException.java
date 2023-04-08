@@ -1,4 +1,4 @@
-package com.gamestore.util.exception;
+package com.gamestore.exception;
 
 public class UserNotFoundException extends Exception {
     public UserNotFoundException(){
