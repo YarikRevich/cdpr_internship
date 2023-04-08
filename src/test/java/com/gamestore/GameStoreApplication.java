@@ -42,6 +42,4 @@ class GameStoreApplication {
 		assertThat(orderController).isNotNull();
 		assertThat(userController).isNotNull();
 	}
-
-
 }
