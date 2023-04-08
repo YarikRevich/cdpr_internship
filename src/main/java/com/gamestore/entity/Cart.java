@@ -26,7 +26,7 @@ public class Cart implements Serializable {
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "games_id")
+    @JoinColumn(name = "cartItems_id")
     private List<CartItem> cartItems;
 
     public long getId() {
@@ -35,6 +35,14 @@ public class Cart implements Serializable {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public User getUser(){
+        return this.user;
+    }
+
+    public void setUser(User user){
+        this.user = user;
     }
 
     public List<CartItem> getCartItems() {
