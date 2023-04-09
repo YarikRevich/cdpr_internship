@@ -18,29 +18,29 @@ import org.springframework.http.HttpStatus;
 import com.gamestore.entity.Game;
 import com.gamestore.entity.User;
 import com.gamestore.service.OrderService;
-import com.gamestore.practicaltask.entity.wrapper.BuyProductWrapper;
+// import com.gamestore.practicaltask.entity.wrapper.BuyProductWrapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 @RequestMapping("transactions")
 public class OrderController {
-    @Autowired
-    private OrderService transactionService;
+    // @Autowired
+    // private OrderService transactionService;
 
-    @ResponseStatus(code = HttpStatus.CREATED)
-    @RequestMapping(value = "/buyProduct", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void buyProduct(@RequestBody BuyProductWrapper buyProductWrapper) throws Exception {
-        transactionService.buyProduct(buyProductWrapper);
-    }
+    // @ResponseStatus(code = HttpStatus.CREATED)
+    // @RequestMapping(value = "/buyProduct", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    // public void buyProduct(@RequestBody BuyProductWrapper buyProductWrapper) throws Exception {
+    //     transactionService.buyProduct(buyProductWrapper);
+    // }
 
-    @RequestMapping(value = "/getAllProductsByUserId/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ArrayList<Game> getAllProductsByUserId(@PathVariable int id) throws Exception{
-        return transactionService.getAllProductsByUserId(id);
-    }
+    // @RequestMapping(value = "/getAllProductsByUserId/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    // public @ResponseBody ArrayList<Game> getAllProductsByUserId(@PathVariable int id) throws Exception{
+    //     return transactionService.getAllProductsByUserId(id);
+    // }
 
-    @RequestMapping(value = "/getAllUsersByProductId/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ArrayList<User> getAllUsersByProductId(@PathVariable int id) throws Exception {
-        return transactionService.getAllUsersByProductId(id);
-    }
+    // @RequestMapping(value = "/getAllUsersByProductId/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    // public @ResponseBody ArrayList<User> getAllUsersByProductId(@PathVariable int id) throws Exception {
+    //     return transactionService.getAllUsersByProductId(id);
+    // }
 }

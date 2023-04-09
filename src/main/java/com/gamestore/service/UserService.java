@@ -3,7 +3,7 @@ package com.gamestore.service;
 import java.util.List;
 
 import com.gamestore.dao.UserDAO;
-import com.gamestore.dto.UserDTO;
+import com.gamestore.dto.UserCreationDTO;
 import com.gamestore.entity.User;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
@@ -18,15 +18,15 @@ public class UserService {
     @Autowired
     private UserDAO userDao;
 
-    public long create(UserDTO userDto) throws AlreadyExistsException {
-        if (!this.userDao.existsByEmail(userDto.getEmail())){
+    public long create(UserCreationDTO userCreationDto) throws AlreadyExistsException {
+        if (!this.userDao.existsByEmail(userCreationDto.getEmail())){
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         
             User user = new User();
-            user.setFirstName(userDto.getFirstName());
-            user.setLastName(userDto.getLastName());
-            user.setEmail(userDto.getEmail());
-            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            user.setFirstName(userCreationDto.getFirstName());
+            user.setLastName(userCreationDto.getLastName());
+            user.setEmail(userCreationDto.getEmail());
+            user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
         
             return this.userDao.save(user);
         } else {

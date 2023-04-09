@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
-import com.gamestore.dto.UserDTO;
+import com.gamestore.dto.UserCreationDTO;
 import com.gamestore.entity.User;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
@@ -27,7 +27,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(value = "v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody long create(@RequestBody UserDTO user) throws AlreadyExistsException {
+    public @ResponseBody long create(@RequestBody UserCreationDTO user) throws AlreadyExistsException {
         return this.userService.create(user);
     }
 

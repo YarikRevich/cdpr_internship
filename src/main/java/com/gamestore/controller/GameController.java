@@ -19,26 +19,26 @@ import com.gamestore.service.GameService;
 
 @RestController
 public class GameController {
-    @Autowired
-    private GameService gameService;
+    // @Autowired
+    // private GameService gameService;
 
-    @PostMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Long> create(@RequestBody Game product){
-        return this.gameService.create(product); 
-    }
+    // @PostMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<Long> create(@RequestBody Game product){
+    //     return this.gameService.create(product); 
+    // }
 
-    @GetMapping(value = "v1/game/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Game get(@PathVariable long id){
-        return new Game();
-    }
+    // @GetMapping(value = "v1/game/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public @ResponseBody Game get(@PathVariable long id){
+    //     return new Game();
+    // }
 
-    @GetMapping(value = "v1/games", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ArrayList<Game> get(){
-        return productService.getAllProducts();
-    }
+    // @GetMapping(value = "v1/games", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public @ResponseBody ArrayList<Game> get(){
+    //     return productService.getAllProducts();
+    // }
 
-    @DeleteMapping(value = "v1/game/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void delete(@PathVariable long id) throws Exception{
-        productService.deleteProduct(id); 
-    }
+    // @DeleteMapping(value = "v1/game/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    // public void delete(@PathVariable long id) throws Exception{
+    //     productService.deleteProduct(id); 
+    // }
 }

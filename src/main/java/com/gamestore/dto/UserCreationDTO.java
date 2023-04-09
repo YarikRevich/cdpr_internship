@@ -8,7 +8,7 @@ import lombok.ToString;
 @Data
 @Getter
 @ToString
-public class UserDTO {
+public class UserCreationDTO {
     @NonNull
     private String firstName;
 
