@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,15 +24,17 @@ public class Game implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NonNull
+    @Column(nullable = false)
     private String name;
     
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "genres_id")
     private List<Genre> genres;
 
+    @Column(nullable = false)
     private int price;
 
+    @Column(nullable = false)
     private int availableQuantity;
 
     public long getId() {

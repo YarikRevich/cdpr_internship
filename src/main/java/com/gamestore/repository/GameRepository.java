@@ -17,11 +17,11 @@ public interface GameRepository extends JpaRepository<Game, Long> {
     public Game findByName(String name);
     public boolean existsByName(String name);
     
-    @Query("SELECT * FROM games WHERE genre IN (:genres)")
-    public List<Game> findAllByGenres(List<Genre> genres);
+    // @Query("SELECT * FROM games WHERE genre IN (:genres)")
+    // public List<Game> findAllByGenres(List<Genre> genres);
 
-    public List<Game> findAllByPriceGreaterThan(int price);
-    public List<Game> findAllByPriceLowerThan(int price);
+    // public List<Game> findAllByPriceGreaterThan(int price);
+    // public List<Game> findAllByPriceLowerThan(int price);
 
-    public List<Game> findAllByAvailableQuantityNotNull(int price);
+    // public List<Game> findAllByAvailableQuantityNotNull(int price);
 }

@@ -1,5 +1,6 @@
 package com.gamestore.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -18,7 +19,7 @@ public class Genre implements Serializable{
     @GeneratedValue
     private long id;
 
-    @NonNull
+    @Column(nullable = false)
     private String name;
 
     public long getId() {

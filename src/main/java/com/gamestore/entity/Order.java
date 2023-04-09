@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 
 import java.time.LocalTime;
 
@@ -23,6 +24,7 @@ public class Order implements Serializable{
     @JoinColumn(name = "carts_id")
     private Cart cart;
 
+    @Column(nullable = false)
     private LocalTime creationTime;
 
     public long getId() {

@@ -16,24 +16,24 @@ public class UserDAO {
     private UserRepository userRepository;
 
     public long save(User user){
-        User result = userRepository.save(user);
+        User result = this.userRepository.save(user);
         return result.getId();
     }
 
     public User getById(long id) throws EntityNotFoundException{
-        return userRepository.findById(id);
+        return this.userRepository.findById(id);
     }
 
     public boolean existsById(long id) throws EntityNotFoundException{
-        return userRepository.existsById(id);
+        return this.userRepository.existsById(id);
     };
 
     public boolean existsByEmail(String email) throws EntityNotFoundException{
-        return userRepository.existsByEmail(email);
+        return this.userRepository.existsByEmail(email);
     }
 
     public List<User> getAll() {
-        return userRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+        return this.userRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
     
     public void delete(long id) {
