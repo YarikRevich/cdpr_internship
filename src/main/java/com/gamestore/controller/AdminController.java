@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 
 import com.gamestore.dto.AdminCreationDTO;
 import com.gamestore.entity.Admin;
@@ -25,7 +26,7 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody long create(@RequestBody AdminCreationDTO admin) throws AlreadyExistsException {
+    public @ResponseBody long create(@RequestBody @Validated AdminCreationDTO admin) throws AlreadyExistsException {
         return this.adminService.create(admin);
     }
 

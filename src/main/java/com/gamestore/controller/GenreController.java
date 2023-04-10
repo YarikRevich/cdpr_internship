@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,7 +25,7 @@ public class GenreController {
     private GenreService genreService;
 
     @PostMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody long create(@RequestBody GenreCreationDTO genre) throws AlreadyExistsException {
+    public @ResponseBody long create(@RequestBody @Validated GenreCreationDTO genre) throws AlreadyExistsException {
         return genreService.create(genre); 
     }
 
