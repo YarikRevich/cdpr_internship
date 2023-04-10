@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import com.gamestore.repository.UserRepository;
 import com.gamestore.repository.GameRepository;
 import com.gamestore.repository.OrderRepository;
@@ -27,43 +29,28 @@ public class GameDAO {
     @Autowired
     private GameRepository gameRepository;
 
-    public long save(Game game) throws Exception {
+    public long save(Game game) {
         Game result = this.gameRepository.save(game);
         return result.getId();
     }
 
-    public Game getById(long id) throws Exception{
+    public Game getById(long id) throws EntityNotFoundException{
         return this.gameRepository.findById(id);
     }
+
+    public boolean existsById(long id) throws EntityNotFoundException{
+        return this.gameRepository.existsById(id);
+    };
+
+    public boolean existsByName(String name) throws EntityNotFoundException {
+        return this.gameRepository.existsByName(name);
+    };
 
     public List<Game> getAll() {
         return this.gameRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
     }
 
-    public void delete(long id){
+    public void delete(long id) throws EntityNotFoundException {
         this.gameRepository.deleteById(id);
     }
-
-    // public ArrayList<Game> create(long id) throws Exception{
-    //     User user = null;
-    //     if (userRepository.existsById(id)){
-    //         user = userRepository.getReferenceById(id);
-    //     } else {
-    //         throw new UserNotFoundException();
-    //     }
-    //     ArrayList<Game> products = new ArrayList<>();
-
-    //     ArrayList<Order> transactions = new ArrayList<>(transactionRepository.findAllByUser(user));
-    //     for (Order transaction : transactions){
-    //         products.add(transaction.getProduct());
-    //     }
-
-    //     return products;
-    // }
-
-    // /**
-    //  * Displays a list of users bought certain product
-    //  * @param id id of the product
-    //  * @return list of users bought product with certain id 
-    //  */
 }

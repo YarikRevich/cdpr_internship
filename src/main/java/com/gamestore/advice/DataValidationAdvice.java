@@ -1,6 +1,7 @@
 package com.gamestore.advice;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,6 +23,13 @@ public class DataValidationAdvice {
     @ExceptionHandler(AlreadyExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     String handleAlreadyExistsException(AlreadyExistsException ex) {
+      return ex.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String handleMissingServletRequestParameterException(MissingServletRequestParameterException ex) {
       return ex.getMessage();
     }
 }

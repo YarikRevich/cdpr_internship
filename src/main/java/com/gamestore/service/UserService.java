@@ -18,15 +18,15 @@ public class UserService {
     @Autowired
     private UserDAO userDao;
 
-    public long create(UserCreationDTO userCreationDto) throws AlreadyExistsException {
-        if (!this.userDao.existsByEmail(userCreationDto.getEmail())){
+    public long create(UserCreationDTO userCreationRequestDto) throws AlreadyExistsException {
+        if (!this.userDao.existsByEmail(userCreationRequestDto.getEmail())){
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
         
             User user = new User();
-            user.setFirstName(userCreationDto.getFirstName());
-            user.setLastName(userCreationDto.getLastName());
-            user.setEmail(userCreationDto.getEmail());
-            user.setPassword(passwordEncoder.encode(userCreationDto.getPassword()));
+            user.setFirstName(userCreationRequestDto.getFirstName());
+            user.setLastName(userCreationRequestDto.getLastName());
+            user.setEmail(userCreationRequestDto.getEmail());
+            user.setPassword(passwordEncoder.encode(userCreationRequestDto.getPassword()));
         
             return this.userDao.save(user);
         } else {

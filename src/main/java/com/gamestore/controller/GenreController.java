@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,12 +26,12 @@ public class GenreController {
     private GenreService genreService;
 
     @PostMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody long create(@RequestBody @Validated GenreCreationRequestDTO genre) throws AlreadyExistsException {
-        return genreService.create(genre); 
+    public @ResponseBody long create(@RequestBody @Validated GenreCreationRequestDTO genreCreationRequestDto) throws AlreadyExistsException {
+        return genreService.create(genreCreationRequestDto); 
     }
 
-    @GetMapping(value = "v1/genre/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Genre get(@PathVariable long id) throws NotFoundException {
+    @GetMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Genre get(@RequestParam(name = "id") long id) throws NotFoundException {
         return genreService.get(id); 
     }
 
@@ -39,8 +40,8 @@ public class GenreController {
         return genreService.getAll();
     }
 
-    @DeleteMapping(value = "v1/genre/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void delete(@PathVariable long id) throws NotFoundException {
+    @DeleteMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void delete(@RequestParam(name = "id") long id) throws NotFoundException {
         genreService.delete(id); 
     }
 }
