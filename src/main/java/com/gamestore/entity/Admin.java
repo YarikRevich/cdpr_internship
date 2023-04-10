@@ -22,6 +22,14 @@ public class Admin implements Serializable {
     @JoinColumn(name = "users_id")
     private User user;
 
+    public long getId(){
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public User getUser() {
         return this.user;
     }

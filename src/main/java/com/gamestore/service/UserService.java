@@ -20,7 +20,7 @@ public class UserService {
 
     public long create(UserCreationDTO userCreationDto) throws AlreadyExistsException {
         if (!this.userDao.existsByEmail(userCreationDto.getEmail())){
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
         
             User user = new User();
             user.setFirstName(userCreationDto.getFirstName());

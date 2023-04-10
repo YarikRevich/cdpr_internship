@@ -24,7 +24,7 @@ public class Order implements Serializable{
     @JoinColumn(name = "carts_id")
     private Cart cart;
 
-    @Column(nullable = false)
+    @Column(name = "creation_time", nullable = false)
     private LocalTime creationTime;
 
     public long getId() {

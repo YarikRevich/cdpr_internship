@@ -1,6 +1,7 @@
 package com.gamestore.controller;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,38 +9,35 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.gamestore.entity.Game;
-import com.gamestore.service.GameService;
+import com.gamestore.dto.GenreCreationDTO;
+import com.gamestore.entity.Genre;
+import com.gamestore.exception.AlreadyExistsException;
+import com.gamestore.exception.NotFoundException;
 import com.gamestore.service.GenreService;
 
 @RestController
 public class GenreController {
-    // @Autowired
-    // private GenreService genreService;
+    @Autowired
+    private GenreService genreService;
 
-    // @PostMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<Long> create(@RequestBody Game product){
-    //     return genreService.create(product); 
-    // }
+    @PostMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody long create(@RequestBody GenreCreationDTO genre) throws AlreadyExistsException {
+        return genreService.create(genre); 
+    }
 
-    // @GetMapping(value = "v1/genre/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    // public @ResponseBody Game get(@PathVariable long id){
-    //     return genreService.get(product); 
-    // }
+    @GetMapping(value = "v1/genre/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Genre get(@PathVariable long id) throws NotFoundException {
+        return genreService.get(id); 
+    }
 
-    // @GetMapping(value = "v1/genres", produces = MediaType.APPLICATION_JSON_VALUE)
-    // public @ResponseBody ArrayList<Game> get(){
-    //     return genreService.getAllProducts();
-    // }
+    @GetMapping(value = "v1/genres", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Genre> get(){
+        return genreService.getAll();
+    }
 
-    // @DeleteMapping(value = "v1/genre/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    // public void delete(@PathVariable long id) throws Exception{
-    //     genreService.deleteProduct(id); 
-    // }
+    @DeleteMapping(value = "v1/genre/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void delete(@PathVariable long id) throws NotFoundException {
+        genreService.delete(id); 
+    }
 }

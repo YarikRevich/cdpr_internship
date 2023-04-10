@@ -1,62 +1,38 @@
 package com.gamestore.dao;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
+import javax.persistence.EntityNotFoundException;
 
-import com.gamestore.entity.Game;
+import com.gamestore.entity.Admin;
 import com.gamestore.repository.AdminRepository;
-import com.gamestore.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 
-// import com.gamestore.util.exception.ProductNotFoundException;
-
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * Dao service which interects with product repository
- */
-@Component
+@Service
 public class AdminDAO {
-    // @Autowired
-    // private AdminRepository adminRepository; 
+    @Autowired
+    private AdminRepository adminRepository;
 
-    // public int getProductPrice(long id) throws Exception{
-    //     Game product = null;
-    //     if (productRepository.existsById(id)){
-    //         product = productRepository.getById(id);
-    //     } else {
-    //         throw new ProductNotFoundException();
-    //     }
-    //     return product.getPrice();
-    // }
+    public long save(Admin admin){
+        Admin result = this.adminRepository.save(admin);
+        return result.getId();
+    }
 
-    // public Game getProductById(long id) throws Exception{
-    //     Game product = null;
-    //     if (productRepository.existsById(id)){
-    //         product = productRepository.getById(id);
-    //     } else {
-    //         throw new ProductNotFoundException();
-    //     }
-    //     return product;
-    // }
+    public Admin getById(long id) throws EntityNotFoundException{
+        return this.adminRepository.findById(id);
+    }
+
+    public boolean existsById(long id) throws EntityNotFoundException{
+        return this.adminRepository.existsById(id);
+    };
+
+    public List<Admin> getAll() {
+        return this.adminRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+    }
     
-    // public ArrayList<Game> getAllProducts(){
-    //     return new ArrayList<Game>(productRepository.findAll());
-    // }
-
-    // /**
-    //  * Creates new product to product repository
-    //  */
-    // public void createProduct(Game product){
-    //     productRepository.save(product);
-    // }
-
-    // /**
-    //  * Deletes product from product repository
-    //  */
-    // public void deleteProduct(long id) throws Exception{
-    //     productRepository.delete(this.getProductById(id));
-    // }
+    public void delete(long id) {
+        this.adminRepository.deleteById(id);
+    }
 }

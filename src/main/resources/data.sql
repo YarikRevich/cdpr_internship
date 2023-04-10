@@ -1,2 +1,2 @@
-INSERT INTO users (firstName, lastName, email, password) VALUES ("admin", "admin", "test@gmail.com", "12345678");
+INSERT INTO users (first_name, last_name, email, password) VALUES ('admin', 'admin', 'test@gmail.com', '$2a$12$NKfTtW3WArz6F0y6plpRUeCozoPnUoYIcb808wQMubrUvPkFPLu6m');
 INSERT INTO admins (users_id) VALUES (1);

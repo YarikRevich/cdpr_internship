@@ -9,14 +9,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import io.micrometer.core.lang.NonNull;
-
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-@Table(name = "cartItems")
+@Table(name = "cart_items")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +28,7 @@ public class CartItem {
     @JoinColumn(name = "games_id")
     private Game game;
 
-    @Column(nullable = false)
+    @Column(name="quantity", nullable = false)
     private int quantity;
 
     public User getUser(){

@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import io.micrometer.core.lang.NonNull;
-
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;
 
@@ -19,7 +17,7 @@ public class Genre implements Serializable{
     @GeneratedValue
     private long id;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     public long getId() {
