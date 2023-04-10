@@ -13,7 +13,7 @@ The online gaming store is equipped with a host of cutting-edge features, includ
 
 * A secure and reliable JWT authorization mechanism.
 * An extensive documentation conforming to the industry-standard OpenAPI specifications.
-* Seamless compatibility and integration with GraalVM compilation technology for optimal performance and efficiency. 
+* Seamless compatibility and integration with GraalVM compilation technology for optimal performance and efficiency. For further information regarding Spring Boot's support for GraalVM, please refer to the following [link](https://spring.io/blog/2022/09/26/native-support-in-spring-boot-3-0-0-m5)
 
 ## Setup
 
@@ -22,8 +22,17 @@ In order to setup the project it's important to have preinstalled **Maven** buil
 ```shell
 mvn clean install
 
-java -jar target/gamestore.jar
+java -jar target/gamestore-0.0.1-SNAPSHOT.jar
 ```
+
+To generate a native image, executing the following command is imperative:
+
+```shell
+mvn -Pnative package
+```
+
+The installation of **GraalVM** is a crucial prerequisite that should not be overlooked. 
+
 
 ## Documentation
 

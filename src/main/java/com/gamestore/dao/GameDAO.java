@@ -1,28 +1,16 @@
 package com.gamestore.dao;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
-import com.gamestore.repository.UserRepository;
 import com.gamestore.repository.GameRepository;
-import com.gamestore.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
-// import com.gamestore.util.exception.NotEnoughMoneyToBuyProductException;
-// import com.gamestore.util.exception.ProductNotFoundException;
-// import com.gamestore.util.exception.UserNotFoundException;
-
-import com.gamestore.entity.User;
 import com.gamestore.entity.Game;
-import com.gamestore.entity.Order;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Component
 public class GameDAO {
@@ -34,11 +22,11 @@ public class GameDAO {
         return result.getId();
     }
 
-    public Game getById(long id) throws EntityNotFoundException{
+    public Game getById(long id) throws EntityNotFoundException {
         return this.gameRepository.findById(id);
     }
 
-    public boolean existsById(long id) throws EntityNotFoundException{
+    public boolean existsById(long id) throws EntityNotFoundException {
         return this.gameRepository.existsById(id);
     };
 

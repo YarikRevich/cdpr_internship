@@ -52,6 +52,5 @@ public class UserService {
         } else {
             throw new NotFoundException("User with the given id does not exist");
         }
-        
     } 
 }
