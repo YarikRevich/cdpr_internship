@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import com.gamestore.dto.GenreCreationRequestDTO;
 import com.gamestore.entity.Genre;
 import com.gamestore.exception.AlreadyExistsException;
@@ -21,6 +23,7 @@ import com.gamestore.exception.NotFoundException;
 import com.gamestore.service.GenreService;
 
 @RestController
+@Tag(name = "Genre")
 public class GenreController {
     @Autowired
     private GenreService genreService;

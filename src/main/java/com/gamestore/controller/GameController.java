@@ -21,11 +21,13 @@ import com.gamestore.entity.User;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
 import com.gamestore.service.GameService;
-import com.gamestore.service.UserService;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
+@Tag(name = "Game")
 public class GameController {
     @Autowired
     private GameService gameService;

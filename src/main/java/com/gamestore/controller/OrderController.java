@@ -22,9 +22,12 @@ import com.gamestore.exception.NotFoundException;
 import com.gamestore.service.OrderService;
 import com.gamestore.service.UserService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
+@Tag(name = "Order")
 public class OrderController {
     @Autowired
     private OrderService orderService;
