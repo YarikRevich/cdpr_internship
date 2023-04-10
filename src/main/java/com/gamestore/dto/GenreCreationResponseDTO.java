@@ -11,8 +11,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-public class AdminCreationDTO {
-    @JsonProperty("user_id")
-    private long userId;
+public class GenreCreationResponseDTO {
+    @JsonProperty("id")
+    private long id;
 }
-

@@ -25,22 +25,22 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @PostMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody long create(@RequestBody @Validated AdminCreationDTO admin) throws AlreadyExistsException {
         return this.adminService.create(admin);
     }
 
-    @GetMapping(value = "v1/admin/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "v1/admin/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody Admin get(@PathVariable long id) throws NotFoundException {
         return this.adminService.get(id);
     }
 
-    @GetMapping(value = "v1/admins", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "v1/admins", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Admin> get() throws NotFoundException {
         return this.adminService.getAll();
     }
 
-    @DeleteMapping(value = "v1/admin/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "v1/admin/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody void delete(@PathVariable long id) throws NotFoundException {
         this.adminService.delete(id);
     }

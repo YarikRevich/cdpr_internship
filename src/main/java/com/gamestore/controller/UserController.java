@@ -25,22 +25,22 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(value = "v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "v1/user", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody long create(@RequestBody @Validated UserCreationDTO user) throws AlreadyExistsException {
         return this.userService.create(user);
     }
 
-    @GetMapping(value = "v1/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "v1/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody User get(@PathVariable long id) throws NotFoundException {
         return this.userService.get(id);
     }
 
-    @GetMapping(value = "v1/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "v1/users", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<User> get() throws NotFoundException {
         return this.userService.getAll();
     }
 
-    @DeleteMapping(value = "v1/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "v1/user/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody void delete(@PathVariable long id) throws NotFoundException {
         this.userService.delete(id);
     }

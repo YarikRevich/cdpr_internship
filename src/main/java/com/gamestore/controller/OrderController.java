@@ -1,46 +1,53 @@
 package com.gamestore.controller;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.MediaType;
-import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 
-import com.gamestore.entity.Game;
+import com.gamestore.dto.OrderCreationDTO;
+import com.gamestore.dto.UserCreationDTO;
+import com.gamestore.entity.Order;
 import com.gamestore.entity.User;
+import com.gamestore.exception.AlreadyExistsException;
+import com.gamestore.exception.NotFoundException;
 import com.gamestore.service.OrderService;
-// import com.gamestore.practicaltask.entity.wrapper.BuyProductWrapper;
+import com.gamestore.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
-@RequestMapping("transactions")
 public class OrderController {
-    // @Autowired
-    // private OrderService transactionService;
+    @Autowired
+    private OrderService orderService;
 
-    // @ResponseStatus(code = HttpStatus.CREATED)
-    // @RequestMapping(value = "/buyProduct", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    // public void buyProduct(@RequestBody BuyProductWrapper buyProductWrapper) throws Exception {
-    //     transactionService.buyProduct(buyProductWrapper);
-    // }
+    @PostMapping(value = "v1/order", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody long create(@RequestBody @Validated OrderCreationDTO user) throws AlreadyExistsException {
+        //return this.orderService.create(user);
+        return 0;
+    }
 
-    // @RequestMapping(value = "/getAllProductsByUserId/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    // public @ResponseBody ArrayList<Game> getAllProductsByUserId(@PathVariable int id) throws Exception{
-    //     return transactionService.getAllProductsByUserId(id);
-    // }
+    @GetMapping(value = "v1/order/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody Order get(@PathVariable long id) throws NotFoundException {
+        // return this.orderService.get(id);
+        return null;
+    }
 
-    // @RequestMapping(value = "/getAllUsersByProductId/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    // public @ResponseBody ArrayList<User> getAllUsersByProductId(@PathVariable int id) throws Exception {
-    //     return transactionService.getAllUsersByProductId(id);
-    // }
+    @GetMapping(value = "v1/orders", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody List<Order> get() throws NotFoundException {
+        return null;
+        // return this.orderService.getAll();
+    }
+
+    @DeleteMapping(value = "v1/order/{id}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody void delete(@PathVariable long id) throws NotFoundException {
+        // this.orderService.delete(id);
+    }
 }

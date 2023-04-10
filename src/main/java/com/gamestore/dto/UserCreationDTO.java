@@ -6,12 +6,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 @Data
 @Getter
 @ToString
+@NoArgsConstructor
 public class UserCreationDTO {
-
     @NonNull
     @JsonProperty("first_name")
     private String firstName;

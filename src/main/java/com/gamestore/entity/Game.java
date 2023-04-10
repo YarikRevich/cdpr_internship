@@ -22,7 +22,7 @@ public class Game implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
     
     @ManyToMany(cascade = CascadeType.ALL)

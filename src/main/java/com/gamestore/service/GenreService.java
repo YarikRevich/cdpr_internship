@@ -3,7 +3,7 @@ package com.gamestore.service;
 import java.util.List;
 
 import com.gamestore.dao.GenreDAO;
-import com.gamestore.dto.GenreCreationDTO;
+import com.gamestore.dto.GenreCreationRequestDTO;
 import com.gamestore.entity.Genre;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
@@ -16,8 +16,8 @@ public class GenreService {
     @Autowired
     private GenreDAO genreDao;
 
-    public long create(GenreCreationDTO genreCreationDto) throws AlreadyExistsException {
-        if (this.genreDao.existsByName(genreCreationDto.getName())){
+    public long create(GenreCreationRequestDTO genreCreationDto) throws AlreadyExistsException {
+        if (!this.genreDao.existsByName(genreCreationDto.getName())){
             Genre genre = new Genre();
             genre.setName(genreCreationDto.getName());
             
