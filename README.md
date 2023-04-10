@@ -1,4 +1,4 @@
-# Online games store
+# Online games store API
 ![Linux](https://svgshare.com/i/Zhy.svg)
 ![macOS](https://svgshare.com/i/ZjP.svg)
 [![Windows](https://svgshare.com/i/ZhY.svg)](https://svgshare.com/i/ZhY.svg)
@@ -27,7 +27,7 @@ java -jar target/gamestore.jar
 
 ## Documentation
 
-The subsequent graphical representation is intended to provide a comprehensive illustration of the application programming interface (API) that is being depicted in the project.
+The subsequent graphical representation is intended to provide a comprehensive illustration of the API that is being depicted in the project.
 
 ...
 
