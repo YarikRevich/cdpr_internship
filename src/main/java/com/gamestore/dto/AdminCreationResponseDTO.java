@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @ToString
 @NoArgsConstructor
 public class AdminCreationResponseDTO {
-    @Min(value = 0)
     @JsonProperty("id")
     private long id;
 }

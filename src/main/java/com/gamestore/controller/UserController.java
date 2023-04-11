@@ -57,6 +57,6 @@ public class UserController {
 
     @DeleteMapping(value = "v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody void delete(@Validated UserDeleteRequestDTO userDeleteRequestDto) throws NotFoundException {
-        this.userService.delete(id);
+        this.userService.delete(userDeleteRequestDto);
     }
 }

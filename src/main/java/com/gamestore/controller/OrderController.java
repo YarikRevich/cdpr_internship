@@ -37,7 +37,7 @@ public class OrderController {
     private OrderService orderService;
 
     @PostMapping(value = "v1/order", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody long create(@RequestBody @Validated OrderCreationResponseDTO orderCreationRequestDto) throws AlreadyExistsException {
+    public @ResponseBody OrderCreationResponseDTO create(@RequestBody @Validated OrderCreationResponseDTO orderCreationRequestDto) throws AlreadyExistsException {
         return this.orderService.create(orderCreationRequestDto);
     }
 

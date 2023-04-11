@@ -2,6 +2,7 @@ package com.gamestore.service;
 
 import java.nio.channels.AlreadyBoundException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.gamestore.dao.AdminDAO;
 import com.gamestore.dao.UserDAO;
@@ -15,6 +16,7 @@ import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
 
 import org.springframework.stereotype.Service;
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
@@ -42,14 +44,26 @@ public class AdminService {
 
     public AdminRetrievalResponseDTO get(AdminRetrievalRequestDTO adminRetrievalRequestDto) throws NotFoundException {
         if (this.adminDao.existsById(adminRetrievalRequestDto.getId())){
-            return this.adminDao.getById(adminRetrievalRequestDto.getId());
+            Admin admin = this.adminDao.getById(adminRetrievalRequestDto.getId());
+
+            AdminRetrievalResponseDTO adminRetrievalResponseDto = new AdminRetrievalResponseDTO();
+            adminRetrievalResponseDto.setId(admin.getId());
+            adminRetrievalResponseDto.setUser(admin.getUser());
+
+            return adminRetrievalResponseDto;
         } else {
             throw new NotFoundException("Admin with the given id does not exist");
         }
     }
 
     public List<AdminRetrievalResponseDTO> getAll(){
-        return this.adminDao.getAll();
+        List<Admin> admins = this.adminDao.getAll();
+
+        return admins.stream()
+            .map(game -> new AdminRetrievalResponseDTO(
+                game.getId(), 
+                game.getUser()))
+            .collect(Collectors.toList());
     }
 
     public void delete(AdminDeleteRequestDTO adminDeleteRequestDto) throws NotFoundException {

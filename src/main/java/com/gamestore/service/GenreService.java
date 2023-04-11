@@ -1,9 +1,11 @@
 package com.gamestore.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.gamestore.dao.GenreDAO;
 import com.gamestore.dto.GenreCreationRequestDTO;
+import com.gamestore.dto.GenreRetrievalResponseDTO;
 import com.gamestore.entity.Genre;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
@@ -35,8 +37,14 @@ public class GenreService {
         }
     }
 
-    public List<Genre> getAll(){
-        return this.genreDao.getAll();
+    public List<GenreRetrievalResponseDTO> getAll(){
+        List<Genre> genres = this.genreDao.getAll();
+        
+        return genres.stream()
+            .map(genre -> new GenreRetrievalResponseDTO(
+                genre.getId(), 
+                genre.getName()))
+            .collect(Collectors.toList());
     }
 
     public void delete(long id) throws NotFoundException {

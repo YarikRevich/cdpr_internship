@@ -1,13 +1,17 @@
 package com.gamestore.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.gamestore.dao.GameDAO;
 import com.gamestore.dao.UserDAO;
 import com.gamestore.dto.GameCreationRequestDTO;
 import com.gamestore.dto.GameCreationResponseDTO;
 import com.gamestore.dto.GameRetrievalRequestDTO;
-import com.gamestore.dto.UserCreationDTO;
+import com.gamestore.dto.GameRetrievalResponseDTO;
+import com.gamestore.dto.GameUpdateRequestDTO;
+import com.gamestore.dto.GenreRetrievalResponseDTO;
+import com.gamestore.dto.UserCreationRequestDTO;
 import com.gamestore.entity.Game;
 import com.gamestore.entity.User;
 import com.gamestore.exception.AlreadyExistsException;
@@ -31,13 +35,18 @@ public class GameService {
             game.setPrice(gameCreationRequestDto.getPrice());
             game.setAvailableQuantity(gameCreationRequestDto.getAvailableQuantity());
 
-            return this.gameDao.save(game);
+            long id = this.gameDao.save(game);
+
+            GameCreationResponseDTO gameCreationResponseDto = new GameCreationResponseDTO();
+            gameCreationResponseDto.setId(id);
+
+            return gameCreationResponseDto;
         } else {
             throw new AlreadyExistsException("Game with the given name already exists");
         }
     }
 
-    public Game get(GameRetrievalRequestDTO gameRetrievalRequestDto) throws NotFoundException {
+    public GameRetrievalResponseDTO get(GameRetrievalRequestDTO gameRetrievalRequestDto) throws NotFoundException {
         System.out.println(gameRetrievalRequestDto);
         return null;
         // if (this.gameDao.existsById(id)){
@@ -47,21 +56,32 @@ public class GameService {
         // }
     }
 
-    public List<Game> getAll(){
-        return this.gameDao.getAll();
+    public List<GameRetrievalResponseDTO> getAll(){
+        List<Game> games = this.gameDao.getAll();
+
+        return games.stream()
+            .map(game -> new GameRetrievalResponseDTO(
+                game.getId(), 
+                game.getName(), 
+                game.getGenres().stream().map(genre -> new GenreRetrievalResponseDTO(
+                    genre.getId(), 
+                    genre.getName())).collect(Collectors.toList()), 
+                game.getPrice(), 
+                game.getAvailableQuantity()))
+            .collect(Collectors.toList());
     }
 
-    public GameCreationResponseDTO create(GameCreationRequestDTO gameCreationRequestDto) throws AlreadyExistsException {
-        if (this.gameDao.existsByName(gameCreationRequestDto.getName())){
+    public void update(GameUpdateRequestDTO gameUpdateRequestDto) throws AlreadyExistsException {
+        if (this.gameDao.existsByName(gameUpdateRequestDto.getName())){
             Game game = new Game();
-            game.setName(gameCreationRequestDto.getName());
-            game.setGenres(gameCreationRequestDto.getGenres());
-            game.setPrice(gameCreationRequestDto.getPrice());
-            game.setAvailableQuantity(gameCreationRequestDto.getAvailableQuantity());
+            game.setName(gameUpdateRequestDto.getName());
+            game.setGenres(gameUpdateRequestDto.getGenres());
+            game.setPrice(gameUpdateRequestDto.getPrice());
+            game.setAvailableQuantity(gameUpdateRequestDto.getAvailableQuantity());
 
-            return this.gameDao.save(game);
+            this.gameDao.save(game);
         } else {
-            throw new AlreadyExistsException("Game with the given name does not exist");
+            throw new AlreadyExistsException("Game with the given properties does not exist");
         }
     }
 
