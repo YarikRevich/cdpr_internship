@@ -2,7 +2,7 @@ package com.gamestore.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,6 @@ import com.gamestore.dto.AdminCreationResponseDTO;
 import com.gamestore.dto.AdminDeleteRequestDTO;
 import com.gamestore.dto.AdminRetrievalRequestDTO;
 import com.gamestore.dto.AdminRetrievalResponseDTO;
-import com.gamestore.entity.Admin;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
 import com.gamestore.service.AdminService;
@@ -29,6 +28,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
+@Validated
 @Tag(name = "Admin")
 public class AdminController {
     @Autowired

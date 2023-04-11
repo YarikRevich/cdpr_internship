@@ -2,7 +2,7 @@ package com.gamestore.dto;
 
 import java.time.LocalTime;
 
-import javax.validation.constraints.Min;
+import jakarta.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.gamestore.entity.Cart;

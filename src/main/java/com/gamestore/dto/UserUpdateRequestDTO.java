@@ -1,6 +1,7 @@
 package com.gamestore.dto;
 
-import javax.validation.constraints.Min;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -27,6 +28,7 @@ public class UserUpdateRequestDTO {
     @JsonProperty("last_name")
     private String lastName;
 
+    @Email
     @NonNull
     @JsonProperty("email")
     private String email;

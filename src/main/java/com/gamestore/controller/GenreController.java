@@ -2,7 +2,7 @@ package com.gamestore.controller;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +26,7 @@ import com.gamestore.exception.NotFoundException;
 import com.gamestore.service.GenreService;
 
 @RestController
+@Validated
 @Tag(name = "Genre")
 public class GenreController {
     @Autowired
