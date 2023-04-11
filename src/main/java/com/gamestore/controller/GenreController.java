@@ -2,16 +2,13 @@ package com.gamestore.controller;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +19,6 @@ import com.gamestore.dto.GenreCreationResponseDTO;
 import com.gamestore.dto.GenreDeleteRequestDTO;
 import com.gamestore.dto.GenreRetrievalRequestDTO;
 import com.gamestore.dto.GenreRetrievalResponseDTO;
-import com.gamestore.entity.Genre;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
 import com.gamestore.service.GenreService;

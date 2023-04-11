@@ -14,20 +14,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.gamestore.advice.AuthenticationAdvice;
+import com.gamestore.middleware.AuthenticationMiddleware;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration {
-
 	@Autowired
 	private AuthenticationAdvice authenticationAdvice;
 
 	@Autowired
-	private UserDetailsService jwtUserDetailsService;
-
-	@Autowired
-	private JwtRequestFilter jwtRequestFilter;
+	private AuthenticationMiddleware authenticationMiddleware;
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -62,7 +59,6 @@ public class SecurityConfiguration {
 				exceptionHandling().authenticationEntryPoint(authenticationAdvice).and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		// Add a filter to validate the tokens with every request
-		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		httpSecurity.addFilterBefore(authenticationMiddleware, UsernamePasswordAuthenticationFilter.class);
 	}
 }

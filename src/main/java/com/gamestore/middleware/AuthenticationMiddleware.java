@@ -15,6 +15,9 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.gamestore.config.JwtConfiguration;
+import com.gamestore.service.UserService;
+
 import io.jsonwebtoken.ExpiredJwtException;
 
 @Component
@@ -23,7 +26,7 @@ public class AuthenticationMiddleware extends OncePerRequestFilter {
 	private UserService userService;
 
 	@Autowired
-	private JwtTokenUtil jwtTokenUtil;
+	private JwtConfiguration jwtConfiguration;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
@@ -38,7 +41,7 @@ public class AuthenticationMiddleware extends OncePerRequestFilter {
 		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
 			jwtToken = requestTokenHeader.substring(7);
 			try {
-				username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+				username = jwtConfiguration.getUsernameFromToken(jwtToken);
 			} catch (IllegalArgumentException e) {
 				System.out.println("Unable to get JWT Token");
 			} catch (ExpiredJwtException e) {
@@ -50,11 +53,11 @@ public class AuthenticationMiddleware extends OncePerRequestFilter {
 
 		// Once we get the token validate it.
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			User user = this.userService.getBy(username);
+			User user = this.userService.get(username);
 
 			// if token is valid configure Spring Security to manually set
 			// authentication
-			if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
+			if (jwtConfiguration.validateToken(jwtToken, userDetails)) {
 
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 						userDetails, null, userDetails.getAuthorities());
