@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import com.gamestore.dao.UserDAO;
 import com.gamestore.dto.UserCreationRequestDTO;
 import com.gamestore.dto.UserCreationResponseDTO;
+import com.gamestore.dto.UserDeleteRequestDTO;
+import com.gamestore.dto.UserRetrievalRequestDTO;
 import com.gamestore.dto.UserRetrievalResponseDTO;
 import com.gamestore.dto.UserUpdateRequestDTO;
 import com.gamestore.entity.User;
@@ -43,9 +45,18 @@ public class UserService {
         }
     }
 
-    public User get(long id) throws NotFoundException {
-        if (this.userDao.existsById(id)){
-            return this.userDao.getById(id);
+    public UserRetrievalResponseDTO get(UserRetrievalRequestDTO userRetrievalRequestDto) throws NotFoundException {
+        if (this.userDao.existsById(userRetrievalRequestDto.getId())){
+            User user = this.userDao.getById(userRetrievalRequestDto.getId());
+
+            UserRetrievalResponseDTO userRetrievalResponseDto = new UserRetrievalResponseDTO();
+            userRetrievalResponseDto.setId(user.getId());
+            userRetrievalResponseDto.setFirstName(user.getFirstName());
+            userRetrievalResponseDto.setLastName(user.getLastName());
+            userRetrievalResponseDto.setEmail(user.getEmail());
+            userRetrievalResponseDto.setPassword(user.getPassword());
+
+            return userRetrievalResponseDto;
         } else {
             throw new NotFoundException("User with the given id does not exist");
         }
@@ -64,7 +75,7 @@ public class UserService {
             .collect(Collectors.toList());
     }
 
-    public void update(UserUpdateRequestDTO userUpdateRequestDto) throws AlreadyExistsException {
+    public void update(UserUpdateRequestDTO userUpdateRequestDto) throws NotFoundException {
         if (this.userDao.existsByEmail(userUpdateRequestDto.getEmail())){
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
         
@@ -76,13 +87,13 @@ public class UserService {
         
             this.userDao.save(user);
         } else {
-            throw new AlreadyExistsException("User with the given properties does not exists");
+            throw new NotFoundException("User with the given properties does not exists");
         }
     }
 
-    public void delete(long id) throws NotFoundException {
-        if (this.userDao.existsById(id)){
-            this.userDao.delete(id);
+    public void delete(UserDeleteRequestDTO userDeleteRequestDto) throws NotFoundException {
+        if (this.userDao.existsById(userDeleteRequestDto.getId())){
+            this.userDao.delete(userDeleteRequestDto.getId());
         } else {
             throw new NotFoundException("User with the given id does not exist");
         }

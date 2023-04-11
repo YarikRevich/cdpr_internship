@@ -5,6 +5,9 @@ import java.util.stream.Collectors;
 
 import com.gamestore.dao.GenreDAO;
 import com.gamestore.dto.GenreCreationRequestDTO;
+import com.gamestore.dto.GenreCreationResponseDTO;
+import com.gamestore.dto.GenreDeleteRequestDTO;
+import com.gamestore.dto.GenreRetrievalRequestDTO;
 import com.gamestore.dto.GenreRetrievalResponseDTO;
 import com.gamestore.entity.Genre;
 import com.gamestore.exception.AlreadyExistsException;
@@ -18,20 +21,31 @@ public class GenreService {
     @Autowired
     private GenreDAO genreDao;
 
-    public long create(GenreCreationRequestDTO genreCreationDto) throws AlreadyExistsException {
+    public GenreCreationResponseDTO create(GenreCreationRequestDTO genreCreationDto) throws AlreadyExistsException {
         if (!this.genreDao.existsByName(genreCreationDto.getName())){
             Genre genre = new Genre();
             genre.setName(genreCreationDto.getName());
+
+            long id = this.genreDao.save(genre);
+
+            GenreCreationResponseDTO genreCreationResponseDto = new GenreCreationResponseDTO();
+            genreCreationResponseDto.setId(id);
             
-            return this.genreDao.save(genre);
+            return genreCreationResponseDto;
         } else {
             throw new AlreadyExistsException("Genre with the given name already exists");
         }
     }
 
-    public Genre get(long id) throws NotFoundException {
-        if (this.genreDao.existsById(id)){
-            return this.genreDao.getById(id);
+    public GenreRetrievalResponseDTO get(GenreRetrievalRequestDTO genreRetrievalRequestDto) throws NotFoundException {
+        if (this.genreDao.existsById(genreRetrievalRequestDto.getId())){
+            Genre genre = this.genreDao.getById(genreRetrievalRequestDto.getId());
+
+            GenreRetrievalResponseDTO genreRetrievalResponseDto = new GenreRetrievalResponseDTO();
+            genre.setId(genre.getId());
+            genre.setName(genre.getName());
+
+            return genreRetrievalResponseDto;
         } else {
             throw new NotFoundException("Genre with the given id does not exist");
         }
@@ -39,7 +53,7 @@ public class GenreService {
 
     public List<GenreRetrievalResponseDTO> getAll(){
         List<Genre> genres = this.genreDao.getAll();
-        
+
         return genres.stream()
             .map(genre -> new GenreRetrievalResponseDTO(
                 genre.getId(), 
@@ -47,9 +61,9 @@ public class GenreService {
             .collect(Collectors.toList());
     }
 
-    public void delete(long id) throws NotFoundException {
-        if (this.genreDao.existsById(id)){
-            this.genreDao.delete(id);
+    public void delete(GenreDeleteRequestDTO genreDeleteRequestDto) throws NotFoundException {
+        if (this.genreDao.existsById(genreDeleteRequestDto.getId())){
+            this.genreDao.delete(genreDeleteRequestDto.getId());
         } else {
             throw new NotFoundException("Genre with the given id does not exist");
         }  

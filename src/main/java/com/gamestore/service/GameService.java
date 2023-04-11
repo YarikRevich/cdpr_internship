@@ -7,6 +7,7 @@ import com.gamestore.dao.GameDAO;
 import com.gamestore.dao.UserDAO;
 import com.gamestore.dto.GameCreationRequestDTO;
 import com.gamestore.dto.GameCreationResponseDTO;
+import com.gamestore.dto.GameDeleteRequestDTO;
 import com.gamestore.dto.GameRetrievalRequestDTO;
 import com.gamestore.dto.GameRetrievalResponseDTO;
 import com.gamestore.dto.GameUpdateRequestDTO;
@@ -71,7 +72,7 @@ public class GameService {
             .collect(Collectors.toList());
     }
 
-    public void update(GameUpdateRequestDTO gameUpdateRequestDto) throws AlreadyExistsException {
+    public void update(GameUpdateRequestDTO gameUpdateRequestDto) throws NotFoundException {
         if (this.gameDao.existsByName(gameUpdateRequestDto.getName())){
             Game game = new Game();
             game.setName(gameUpdateRequestDto.getName());
@@ -81,13 +82,13 @@ public class GameService {
 
             this.gameDao.save(game);
         } else {
-            throw new AlreadyExistsException("Game with the given properties does not exist");
+            throw new NotFoundException("Game with the given properties does not exist");
         }
     }
 
-    public void delete(long id) throws NotFoundException {
-        if (this.gameDao.existsById(id)){
-            this.gameDao.delete(id);
+    public void delete(GameDeleteRequestDTO gameDeleteRequestDto)throws NotFoundException {
+        if (this.gameDao.existsById(gameDeleteRequestDto.getId())){
+            this.gameDao.delete(gameDeleteRequestDto.getId());
         } else {
             throw new NotFoundException("Game with the given id does not exist");
         }   

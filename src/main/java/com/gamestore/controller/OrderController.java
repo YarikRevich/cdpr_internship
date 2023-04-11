@@ -38,12 +38,14 @@ public class OrderController {
 
     @PostMapping(value = "v1/order", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody OrderCreationResponseDTO create(@RequestBody @Validated OrderCreationResponseDTO orderCreationRequestDto) throws AlreadyExistsException {
-        return this.orderService.create(orderCreationRequestDto);
+        // return this.orderService.create(orderCreationRequestDto);
+        return null;
     }
 
     @GetMapping(value = "v1/order", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody OrderRetrievalResponseDTO get(@Validated OrderRetrievalRequestDTO orderRetrievalRequestDTo) throws NotFoundException {
-        return this.orderService.get(orderRetrievalRequestDTo);
+        // return this.orderService.get(orderRetrievalRequestDTo);
+        return null;
     }
 
     @GetMapping(value = "v1/orders", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
