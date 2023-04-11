@@ -15,7 +15,10 @@ import org.springframework.validation.annotation.Validated;
 
 import com.gamestore.dto.OrderCreationRequestDTO;
 import com.gamestore.dto.OrderCreationResponseDTO;
-import com.gamestore.dto.UserCreationDTO;
+import com.gamestore.dto.OrderDeleteRequestDTO;
+import com.gamestore.dto.OrderRetrievalRequestDTO;
+import com.gamestore.dto.OrderRetrievalResponseDTO;
+import com.gamestore.dto.UserCreationRequestDTO;
 import com.gamestore.entity.Order;
 import com.gamestore.entity.User;
 import com.gamestore.exception.AlreadyExistsException;
@@ -44,13 +47,13 @@ public class OrderController {
     }
 
     @GetMapping(value = "v1/orders", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Order> get() throws NotFoundException {
+    public @ResponseBody List<OrderRetrievalResponseDTO> get() throws NotFoundException {
         return null;
         // return this.orderService.getAll();
     }
 
     @DeleteMapping(value = "v1/order", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody void delete(@RequestParam(name = "id") long id) throws NotFoundException {
+    public @ResponseBody void delete(@Validated OrderDeleteRequestDTO orderDeleteRequestDto) throws NotFoundException {
         // this.orderService.delete(id);
     }
 }

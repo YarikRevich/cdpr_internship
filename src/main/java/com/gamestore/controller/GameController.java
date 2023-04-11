@@ -16,8 +16,11 @@ import org.springframework.validation.annotation.Validated;
 
 import com.gamestore.dto.GameCreationRequestDTO;
 import com.gamestore.dto.GameCreationResponseDTO;
+import com.gamestore.dto.GameDeleteRequestDTO;
 import com.gamestore.dto.GameRetrievalRequestDTO;
-import com.gamestore.dto.UserCreationDTO;
+import com.gamestore.dto.GameRetrievalResponseDTO;
+import com.gamestore.dto.GameUpdateRequestDTO;
+import com.gamestore.dto.UserCreationRequestDTO;
 import com.gamestore.entity.Game;
 import com.gamestore.entity.User;
 import com.gamestore.exception.AlreadyExistsException;

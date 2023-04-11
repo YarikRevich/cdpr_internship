@@ -14,7 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 
-import com.gamestore.dto.UserCreationDTO;
+import com.gamestore.dto.UserCreationRequestDTO;
+import com.gamestore.dto.UserCreationResponseDTO;
+import com.gamestore.dto.UserDeleteRequestDTO;
+import com.gamestore.dto.UserRetrievalRequestDTO;
+import com.gamestore.dto.UserRetrievalResponseDTO;
+import com.gamestore.dto.UserUpdateRequestDTO;
 import com.gamestore.entity.User;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;

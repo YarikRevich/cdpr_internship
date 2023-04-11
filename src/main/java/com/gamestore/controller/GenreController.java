@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.gamestore.dto.GenreCreationRequestDTO;
+import com.gamestore.dto.GenreCreationResponseDTO;
+import com.gamestore.dto.GenreDeleteRequestDTO;
+import com.gamestore.dto.GenreRetrievalRequestDTO;
+import com.gamestore.dto.GenreRetrievalResponseDTO;
 import com.gamestore.entity.Genre;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
@@ -40,13 +44,8 @@ public class GenreController {
     }
 
     @GetMapping(value = "v1/genres", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Genre> get(){
+    public @ResponseBody List<GenreRetrievalResponseDTO> get(){
         return this.genreService.getAll();
-    }
-
-    @PutMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody @Validated GenreUpdateRequestDTO genreUpdateRequestDto) throws NotFoundException {
-        this.genreService.update(genreUpdateRequestDto); 
     }
 
     @DeleteMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
