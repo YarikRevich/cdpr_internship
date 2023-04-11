@@ -1,0 +1,20 @@
+package com.gamestore.dto;
+
+import javax.validation.constraints.Min;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+
+@Data
+@Getter
+@ToString
+@NoArgsConstructor
+public class GameCreationResponseDTO {
+    @Min(value = 0)
+    @JsonProperty("id")
+    private long id;
+}

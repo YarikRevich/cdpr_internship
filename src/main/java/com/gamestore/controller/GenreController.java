@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,22 +30,27 @@ public class GenreController {
     private GenreService genreService;
 
     @PostMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody long create(@RequestBody @Validated GenreCreationRequestDTO genreCreationRequestDto) throws AlreadyExistsException {
-        return genreService.create(genreCreationRequestDto); 
+    public @ResponseBody GenreCreationResponseDTO create(@RequestBody @Validated GenreCreationRequestDTO genreCreationRequestDto) throws AlreadyExistsException {
+        return this.genreService.create(genreCreationRequestDto); 
     }
 
     @GetMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Genre get(@RequestParam(name = "id") long id) throws NotFoundException {
-        return genreService.get(id); 
+    public @ResponseBody GenreRetrievalResponseDTO get(@Validated GenreRetrievalRequestDTO genreRetrievalRequestDto) throws NotFoundException {
+        return this.genreService.get(genreRetrievalRequestDto); 
     }
 
     @GetMapping(value = "v1/genres", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<Genre> get(){
-        return genreService.getAll();
+        return this.genreService.getAll();
+    }
+
+    @PutMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@RequestBody @Validated GenreUpdateRequestDTO genreUpdateRequestDto) throws NotFoundException {
+        this.genreService.update(genreUpdateRequestDto); 
     }
 
     @DeleteMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void delete(@RequestParam(name = "id") long id) throws NotFoundException {
-        genreService.delete(id); 
+    public void delete(@Validated GenreDeleteRequestDTO genreDeleteRequestDto) throws NotFoundException {
+        this.genreService.delete(genreDeleteRequestDto); 
     }
 }

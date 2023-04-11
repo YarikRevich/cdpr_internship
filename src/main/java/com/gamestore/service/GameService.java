@@ -5,6 +5,7 @@ import java.util.List;
 import com.gamestore.dao.GameDAO;
 import com.gamestore.dao.UserDAO;
 import com.gamestore.dto.GameCreationRequestDTO;
+import com.gamestore.dto.GameCreationResponseDTO;
 import com.gamestore.dto.GameRetrievalRequestDTO;
 import com.gamestore.dto.UserCreationDTO;
 import com.gamestore.entity.Game;
@@ -22,7 +23,7 @@ public class GameService {
     @Autowired
     private GameDAO gameDao;
 
-    public long create(GameCreationRequestDTO gameCreationRequestDto) throws AlreadyExistsException {
+    public GameCreationResponseDTO create(GameCreationRequestDTO gameCreationRequestDto) throws AlreadyExistsException {
         if (!this.gameDao.existsByName(gameCreationRequestDto.getName())){
             Game game = new Game();
             game.setName(gameCreationRequestDto.getName());
@@ -48,6 +49,20 @@ public class GameService {
 
     public List<Game> getAll(){
         return this.gameDao.getAll();
+    }
+
+    public GameCreationResponseDTO create(GameCreationRequestDTO gameCreationRequestDto) throws AlreadyExistsException {
+        if (this.gameDao.existsByName(gameCreationRequestDto.getName())){
+            Game game = new Game();
+            game.setName(gameCreationRequestDto.getName());
+            game.setGenres(gameCreationRequestDto.getGenres());
+            game.setPrice(gameCreationRequestDto.getPrice());
+            game.setAvailableQuantity(gameCreationRequestDto.getAvailableQuantity());
+
+            return this.gameDao.save(game);
+        } else {
+            throw new AlreadyExistsException("Game with the given name does not exist");
+        }
     }
 
     public void delete(long id) throws NotFoundException {

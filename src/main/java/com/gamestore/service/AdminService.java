@@ -5,7 +5,11 @@ import java.util.List;
 
 import com.gamestore.dao.AdminDAO;
 import com.gamestore.dao.UserDAO;
-import com.gamestore.dto.AdminCreationDTO;
+import com.gamestore.dto.AdminCreationRequestDTO;
+import com.gamestore.dto.AdminCreationResponseDTO;
+import com.gamestore.dto.AdminDeleteRequestDTO;
+import com.gamestore.dto.AdminRetrievalRequestDTO;
+import com.gamestore.dto.AdminRetrievalResponseDTO;
 import com.gamestore.entity.Admin;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
@@ -21,32 +25,36 @@ public class AdminService {
     @Autowired
     private UserDAO userDao;
 
-    public long create(AdminCreationDTO adminCreationDto) throws AlreadyExistsException {
+    public AdminCreationResponseDTO create(AdminCreationRequestDTO adminCreationDto) throws AlreadyExistsException {
         if (this.userDao.existsById(adminCreationDto.getUserId())){
             Admin admin = new Admin();
             admin.setUser(this.userDao.getById(adminCreationDto.getUserId()));
+
+            AdminCreationResponseDTO adminCreationResponseDto = new AdminCreationResponseDTO();
+
+            adminCreationResponseDto.setId(this.adminDao.save(admin));
             
-            return this.adminDao.save(admin);
+            return adminCreationResponseDto;
         } else {
             throw new AlreadyExistsException("Admin with the given id already exists");
         }
     }
 
-    public Admin get(long id) throws NotFoundException {
-        if (this.adminDao.existsById(id)){
-            return this.adminDao.getById(id);
+    public AdminRetrievalResponseDTO get(AdminRetrievalRequestDTO adminRetrievalRequestDto) throws NotFoundException {
+        if (this.adminDao.existsById(adminRetrievalRequestDto.getId())){
+            return this.adminDao.getById(adminRetrievalRequestDto.getId());
         } else {
             throw new NotFoundException("Admin with the given id does not exist");
         }
     }
 
-    public List<Admin> getAll(){
+    public List<AdminRetrievalResponseDTO> getAll(){
         return this.adminDao.getAll();
     }
 
-    public void delete(long id) throws NotFoundException {
-        if (this.adminDao.existsById(id)){
-            this.adminDao.delete(id);
+    public void delete(AdminDeleteRequestDTO adminDeleteRequestDto) throws NotFoundException {
+        if (this.adminDao.existsById(adminDeleteRequestDto.getId())){
+            this.adminDao.delete(adminDeleteRequestDto.getId());
         } else {
             throw new NotFoundException("Admin with the given id does not exist");
         }  

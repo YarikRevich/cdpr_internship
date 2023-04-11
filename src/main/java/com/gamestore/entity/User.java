@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -30,6 +32,9 @@ public class User implements Serializable{
 
     @Column(name = "password", nullable = false)
     private String password;
+
+    @OneToOne(mappedBy = "users")
+    List<Admin> admins;
 
     public long getId() {
         return this.id;

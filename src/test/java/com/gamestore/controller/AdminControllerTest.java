@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.net.URL;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +16,7 @@ import org.apache.http.client.utils.URIBuilder;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @Sql({ "data.sql" })
-public class AdminControllerTests {
+public class AdminControllerTest {
     @Value(value="${local.server.port}")
 	private int port;
 
@@ -33,6 +33,7 @@ public class AdminControllerTests {
         // builder.addParameter("abc", "xyz");
         String url = builder.build().toString();
 
+        System.out.println(url);
 		// assertThat(this.restTemplate.getForObject(url,
 		// 		GamesRetrievalResponseDTO.class)).contains("{}");
 	}

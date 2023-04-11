@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 
-import com.gamestore.dto.AdminCreationDTO;
+import com.gamestore.dto.AdminCreationRequestDTO;
+import com.gamestore.dto.AdminCreationResponseDTO;
+import com.gamestore.dto.AdminDeleteRequestDTO;
+import com.gamestore.dto.AdminRetrievalRequestDTO;
+import com.gamestore.dto.AdminRetrievalResponseDTO;
 import com.gamestore.entity.Admin;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
@@ -29,23 +33,23 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody long create(@RequestBody @Validated AdminCreationDTO adminCreationRequestDto) throws AlreadyExistsException {
+    public @ResponseBody AdminCreationResponseDTO create(@RequestBody @Validated AdminCreationRequestDTO adminCreationRequestDto) throws AlreadyExistsException {
         return this.adminService.create(adminCreationRequestDto);
     }
 
     @GetMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Admin get(@RequestParam(name = "id") long id) throws NotFoundException {
-        return this.adminService.get(id);
+    public @ResponseBody AdminRetrievalResponseDTO get(@Validated AdminRetrievalRequestDTO adminRetrievalRequestDto) throws NotFoundException {
+        return this.adminService.get(adminRetrievalRequestDto);
     }
 
     @GetMapping(value = "v1/admins", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Admin> get() throws NotFoundException {
+    public @ResponseBody List<AdminRetrievalResponseDTO> get() throws NotFoundException {
         return this.adminService.getAll();
     }
 
     @DeleteMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody void delete(@RequestParam(name = "id") long id) throws NotFoundException {
-        this.adminService.delete(id);
+    public @ResponseBody void delete(@Validated AdminDeleteRequestDTO adminDeleteRequestDto) throws NotFoundException {
+        this.adminService.delete(adminDeleteRequestDto);
     }
 }
 
