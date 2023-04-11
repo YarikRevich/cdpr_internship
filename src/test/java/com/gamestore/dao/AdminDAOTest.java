@@ -14,7 +14,7 @@ import com.gamestore.repository.UserRepository;
 
 @SpringBootTest
 @DataJpaTest
-public class AdminDAOTests {
+public class AdminDAOTest {
     @Autowired
     AdminRepository adminRepository;
 
@@ -39,6 +39,13 @@ public class AdminDAOTests {
     
     // public void delete(long id) {
     //     this.adminRepository.deleteById(id);
+    // }
+
+    // public void setUp() throws Exception{
+    //     ArrayList<Game> products = productDao.getAllProducts();
+    //     for (Game product : products){
+    //         productDao.deleteProduct(product.getId());
+    //     };
     // }
 
 

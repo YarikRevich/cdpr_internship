@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @ToString
 @NoArgsConstructor
-public class UserCreationDTO {
+public class UserCreationRequestDTO {
     @NonNull
     @JsonProperty("first_name")
     private String firstName;

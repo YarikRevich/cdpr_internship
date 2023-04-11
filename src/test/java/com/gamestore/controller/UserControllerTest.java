@@ -1,5 +1,5 @@
 package com.gamestore.controller;
 
-public class UserControllerTests {
+public class UserControllerTest {
     
 }

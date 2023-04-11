@@ -1,5 +1,5 @@
 package com.gamestore.service;
 
-public class UserServiceTests {
+public class UserServiceTest {
     
 }

@@ -2,13 +2,13 @@ package com.gamestore.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.MediaType;
@@ -36,12 +36,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(value = "v1/user", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody UserCreationResponseDTO create(@RequestBody @Validated UserCreationRequestDTO userCreationRequestDto) throws AlreadyExistsException {
+    public @ResponseBody UserCreationResponseDTO create(@Valid @RequestBody UserCreationRequestDTO userCreationRequestDto) throws AlreadyExistsException {
         return this.userService.create(userCreationRequestDto);
     }
 
     @GetMapping(value = "v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody UserRetrievalResponseDTO get(@Validated UserRetrievalRequestDTO userRetrievalRequestDto) throws NotFoundException {
+    public @ResponseBody UserRetrievalResponseDTO get(@Valid UserRetrievalRequestDTO userRetrievalRequestDto) throws NotFoundException {
         return this.userService.get(userRetrievalRequestDto);
     }
 
@@ -51,12 +51,12 @@ public class UserController {
     }
 
     @PutMapping(value = "v1/user", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody @Validated UserUpdateRequestDTO userUpdateRequestDto) throws NotFoundException {
+    public void update(@RequestBody @Valid UserUpdateRequestDTO userUpdateRequestDto) throws NotFoundException {
         this.userService.update(userUpdateRequestDto); 
     }
 
     @DeleteMapping(value = "v1/user", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody void delete(@Validated UserDeleteRequestDTO userDeleteRequestDto) throws NotFoundException {
+    public @ResponseBody void delete(@Valid UserDeleteRequestDTO userDeleteRequestDto) throws NotFoundException {
         this.userService.delete(userDeleteRequestDto);
     }
 }

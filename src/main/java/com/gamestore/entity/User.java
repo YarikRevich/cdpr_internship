@@ -33,8 +33,8 @@ public class User implements Serializable{
     @Column(name = "password", nullable = false)
     private String password;
 
-    @OneToOne(mappedBy = "users")
-    List<Admin> admins;
+    // @OneToOne(mappedBy = "users_id")
+    // List<Admin> admins;
 
     public long getId() {
         return this.id;

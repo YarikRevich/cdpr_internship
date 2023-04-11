@@ -1,5 +1,5 @@
 package com.gamestore.service;
 
-public class OrderServiceTests {
+public class OrderServiceTest {
     
 }

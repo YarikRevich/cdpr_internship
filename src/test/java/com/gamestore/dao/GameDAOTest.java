@@ -22,7 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 // @Import({DataLoader.class, ProductDAO.class, UserDAO.class})
 @SpringBootTest
 @DataJpaTest
-public class GameDAOTests {
+public class GameDAOTest {
     // @Autowired
     // private ProductDAO productDao;
 

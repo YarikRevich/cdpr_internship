@@ -2,6 +2,8 @@ package com.gamestore.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,12 +35,12 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody AdminCreationResponseDTO create(@RequestBody @Validated AdminCreationRequestDTO adminCreationRequestDto) throws AlreadyExistsException {
+    public @ResponseBody AdminCreationResponseDTO create(@Valid @RequestBody AdminCreationRequestDTO adminCreationRequestDto) throws AlreadyExistsException {
         return this.adminService.create(adminCreationRequestDto);
     }
 
     @GetMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody AdminRetrievalResponseDTO get(@Validated AdminRetrievalRequestDTO adminRetrievalRequestDto) throws NotFoundException {
+    public @ResponseBody AdminRetrievalResponseDTO get(@Valid AdminRetrievalRequestDTO adminRetrievalRequestDto) throws NotFoundException {
         return this.adminService.get(adminRetrievalRequestDto);
     }
 
@@ -48,7 +50,7 @@ public class AdminController {
     }
 
     @DeleteMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody void delete(@Validated AdminDeleteRequestDTO adminDeleteRequestDto) throws NotFoundException {
+    public @ResponseBody void delete(@Valid AdminDeleteRequestDTO adminDeleteRequestDto) throws NotFoundException {
         this.adminService.delete(adminDeleteRequestDto);
     }
 }

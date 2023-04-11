@@ -2,6 +2,8 @@ package com.gamestore.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,12 +35,12 @@ public class GameController {
     private GameService gameService;
 
     @PostMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody GameCreationResponseDTO create(@RequestBody @Validated GameCreationRequestDTO gameCreationRequestDto) throws AlreadyExistsException {
+    public @ResponseBody GameCreationResponseDTO create(@RequestBody @Valid GameCreationRequestDTO gameCreationRequestDto) throws AlreadyExistsException {
         return this.gameService.create(gameCreationRequestDto);
     }
 
     @GetMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody GameRetrievalResponseDTO get(@Validated GameRetrievalRequestDTO gameRetrievalRequestDto) throws NotFoundException {
+    public @ResponseBody GameRetrievalResponseDTO get(@Valid GameRetrievalRequestDTO gameRetrievalRequestDto) throws NotFoundException {
         return this.gameService.get(gameRetrievalRequestDto);
     }
 
@@ -48,12 +50,12 @@ public class GameController {
     }
 
     @PutMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody @Validated GameUpdateRequestDTO gameUpdateRequestDto) throws NotFoundException {
+    public void update(@Valid @RequestBody GameUpdateRequestDTO gameUpdateRequestDto) throws NotFoundException {
         this.gameService.update(gameUpdateRequestDto); 
     }
 
     @DeleteMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody void delete(@Validated GameDeleteRequestDTO gameDeleteRequestDto) throws NotFoundException {
+    public @ResponseBody void delete(@Valid GameDeleteRequestDTO gameDeleteRequestDto) throws NotFoundException {
         this.gameService.delete(gameDeleteRequestDto);
     }
 }

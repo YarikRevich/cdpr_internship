@@ -24,5 +24,5 @@ public class AdminRetrievalResponseDTO {
 
     @NonNull
     @JsonProperty("user")
-    private User user;
+    private UserRetrievalResponseDTO user;
 }

@@ -13,7 +13,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-public class AdminCreationDTO {
+public class AdminCreationRequestDTO {
     @Min(value = 0, message = "User id should be greater than 0")
     @JsonProperty("user_id")
     private long userId;

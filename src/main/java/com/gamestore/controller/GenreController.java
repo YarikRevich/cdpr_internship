@@ -2,6 +2,8 @@ package com.gamestore.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +32,22 @@ public class GenreController {
     private GenreService genreService;
 
     @PostMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody GenreCreationResponseDTO create(@RequestBody @Validated GenreCreationRequestDTO genreCreationRequestDto) throws AlreadyExistsException {
+    public @ResponseBody GenreCreationResponseDTO create(@RequestBody @Valid GenreCreationRequestDTO genreCreationRequestDto) throws AlreadyExistsException {
         return this.genreService.create(genreCreationRequestDto); 
     }
 
-    @GetMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody GenreRetrievalResponseDTO get(@Validated GenreRetrievalRequestDTO genreRetrievalRequestDto) throws NotFoundException {
+    @GetMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody GenreRetrievalResponseDTO get(@Valid GenreRetrievalRequestDTO genreRetrievalRequestDto) throws NotFoundException {
         return this.genreService.get(genreRetrievalRequestDto); 
     }
 
-    @GetMapping(value = "v1/genres", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "v1/genres", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<GenreRetrievalResponseDTO> get(){
         return this.genreService.getAll();
     }
 
-    @DeleteMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void delete(@Validated GenreDeleteRequestDTO genreDeleteRequestDto) throws NotFoundException {
+    @DeleteMapping(value = "v1/genre", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void delete(@Valid GenreDeleteRequestDTO genreDeleteRequestDto) throws NotFoundException {
         this.genreService.delete(genreDeleteRequestDto); 
     }
 }

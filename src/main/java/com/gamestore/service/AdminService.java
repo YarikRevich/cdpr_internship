@@ -1,6 +1,5 @@
 package com.gamestore.service;
 
-import java.nio.channels.AlreadyBoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,12 +10,13 @@ import com.gamestore.dto.AdminCreationResponseDTO;
 import com.gamestore.dto.AdminDeleteRequestDTO;
 import com.gamestore.dto.AdminRetrievalRequestDTO;
 import com.gamestore.dto.AdminRetrievalResponseDTO;
+import com.gamestore.dto.UserRetrievalResponseDTO;
 import com.gamestore.entity.Admin;
+import com.gamestore.entity.User;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
 
 import org.springframework.stereotype.Service;
-import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
@@ -48,7 +48,14 @@ public class AdminService {
 
             AdminRetrievalResponseDTO adminRetrievalResponseDto = new AdminRetrievalResponseDTO();
             adminRetrievalResponseDto.setId(admin.getId());
-            adminRetrievalResponseDto.setUser(admin.getUser());
+
+            User user = admin.getUser();
+            adminRetrievalResponseDto.setUser(new UserRetrievalResponseDTO(
+                user.getId(), 
+                user.getFirstName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getPassword()));
 
             return adminRetrievalResponseDto;
         } else {
@@ -62,7 +69,12 @@ public class AdminService {
         return admins.stream()
             .map(game -> new AdminRetrievalResponseDTO(
                 game.getId(), 
-                game.getUser()))
+                new UserRetrievalResponseDTO(
+                    game.getUser().getId(), 
+                    game.getUser().getFirstName(),
+                    game.getUser().getLastName(),
+                    game.getUser().getEmail(),
+                    game.getUser().getPassword())))
             .collect(Collectors.toList());
     }
 
