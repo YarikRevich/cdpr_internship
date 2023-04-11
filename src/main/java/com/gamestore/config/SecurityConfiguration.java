@@ -56,8 +56,7 @@ public class SecurityConfiguration {
                 .antMatchers(
                     "/authenticate",
                     "**/games",
-                    "**/",
-                    ).
+                    "**/").
                 permitAll().
 				anyRequest().authenticated().and().
 				exceptionHandling().authenticationEntryPoint(authenticationAdvice).and().sessionManagement()
