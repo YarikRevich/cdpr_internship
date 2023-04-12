@@ -137,8 +137,8 @@ public class AdminDAOTest {
 
     @Test
     public void getAllShouldWork(){
-        assertThat(this.userDao.getAll().size()).isEqualTo(0);
-        assertThat(this.adminDao.getAll().size()).isEqualTo(0);
+        assertThat(this.userDao.getAll()).isEmpty();
+        assertThat(this.adminDao.getAll()).isEmpty();
 
         User user = new User();
         user.setFirstName("test");

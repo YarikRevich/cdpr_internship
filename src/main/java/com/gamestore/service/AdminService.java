@@ -27,18 +27,23 @@ public class AdminService {
     @Autowired
     private UserDAO userDao;
 
-    public AdminCreationResponseDTO create(AdminCreationRequestDTO adminCreationDto) throws AlreadyExistsException {
+    public AdminCreationResponseDTO create(AdminCreationRequestDTO adminCreationDto) throws AlreadyExistsException, NotFoundException {
         if (this.userDao.existsById(adminCreationDto.getUserId())){
-            Admin admin = new Admin();
-            admin.setUser(this.userDao.getById(adminCreationDto.getUserId()));
+            User user = this.userDao.getById(adminCreationDto.getUserId());
+            if (!this.adminDao.existsByUser(user)){
+                Admin admin = new Admin();
+                admin.setUser(this.userDao.getById(adminCreationDto.getUserId()));
 
-            AdminCreationResponseDTO adminCreationResponseDto = new AdminCreationResponseDTO();
+                AdminCreationResponseDTO adminCreationResponseDto = new     AdminCreationResponseDTO();
 
-            adminCreationResponseDto.setId(this.adminDao.save(admin));
-            
-            return adminCreationResponseDto;
+                adminCreationResponseDto.setId(this.adminDao.save(admin));
+                
+                return adminCreationResponseDto;
+            } else {
+                throw new AlreadyExistsException("Admin with the given user id already exists");
+            }
         } else {
-            throw new AlreadyExistsException("Admin with the given id already exists");
+            throw new NotFoundException("User with the given id does not exist");
         }
     }
 

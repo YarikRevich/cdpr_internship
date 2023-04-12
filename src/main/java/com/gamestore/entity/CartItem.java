@@ -3,9 +3,7 @@ package com.gamestore.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -31,6 +29,14 @@ public class CartItem {
 
     @Column(name="quantity", nullable = false)
     private int quantity;
+
+    public long getId(){
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public User getUser(){
         return this.user;

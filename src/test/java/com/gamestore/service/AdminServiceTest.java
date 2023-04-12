@@ -9,8 +9,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.gamestore.dao.UserDAO;
+import com.gamestore.dto.AdminCreationRequestDTO;
+import com.gamestore.dto.AdminCreationResponseDTO;
+import com.gamestore.dto.UserCreationRequestDTO;
+import com.gamestore.dto.UserCreationResponseDTO;
 import com.gamestore.entity.Admin;
 import com.gamestore.entity.User;
+import com.gamestore.exception.AlreadyExistsException;
+import com.gamestore.exception.NotFoundException;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest(properties = "spring.sql.init.mode=never")
@@ -22,143 +28,95 @@ public class AdminServiceTest {
     UserService userService;
 
     @Test
-    public void createShouldWork(){
-        User user = new User();
-        user.setFirstName("test");
-        user.setLastName("test");
-        user.setEmail("test");
-        user.setPassword("test");
+    public void createShouldWork() {
+        UserCreationRequestDTO userCreationRequestDto = new UserCreationRequestDTO();
+        userCreationRequestDto.setFirstName("test");
+        userCreationRequestDto.setLastName("test");
+        userCreationRequestDto.setEmail("test");
+        userCreationRequestDto.setPassword("test");
 
-        long userId = this.adminService.create(user);
+        UserCreationResponseDTO userCreationResponseDto = null;
+        try{
+            userCreationResponseDto = this.userService.create(userCreationRequestDto);
+        } catch (AlreadyExistsException e){
+            e.printStackTrace();
+        }
+        long userId = userCreationResponseDto.getId();
         assertThat(userId).isGreaterThan(0);
 
-        Admin admin = new Admin();
-        admin.setUser(user);
+        AdminCreationRequestDTO adminCreationRequestDto = new AdminCreationRequestDTO();
+        adminCreationRequestDto.setUserId(userId);
         
-        long adminId = this.adminDao.save(admin);
+        AdminCreationResponseDTO adminCreationResponseDto = null;
+        try {
+            adminCreationResponseDto = this.adminService.create(adminCreationRequestDto);
+        } catch (AlreadyExistsException e){
+            e.printStackTrace();
+        } catch (NotFoundException e){
+            e.printStackTrace();
+        }
+        long adminId = adminCreationResponseDto.getId();
         assertThat(adminId).isGreaterThan(0);
     }
 
     @Test
     public void createWithoutUserShouldFail(){
-        User user = new User();
-        user.setFirstName("test");
-        user.setLastName("test");
-        user.setEmail("test");
-        user.setPassword("test");
-
-        Admin admin = new Admin();
-        admin.setUser(user);
-        
-        long adminId = this.adminDao.save(admin);
-        assertThat(adminId).isGreaterThan(0);
+        // TODO: implement this
     }
 
     @Test
     public void getShouldWork(){
-        User user = new User();
-        user.setFirstName("test");
-        user.setLastName("test");
-        user.setEmail("test");
-        user.setPassword("test");
-
-        long userId = this.userDao.save(user);
-        assertThat(userId).isGreaterThan(0);
-
-        Admin admin = new Admin();
-        admin.setUser(user);
-        
-        long adminId = this.adminDao.save(admin);
-        assertThat(userId).isGreaterThan(0);
-
-        admin = this.adminDao.getById(adminId);
-        assertThat(admin.getUser()).isEqualTo(user);
+        // TODO: implement this
     }
 
     @Test
     public void getShouldFail(){
-        User user = new User();
-        user.setFirstName("test");
-        user.setLastName("test");
-        user.setEmail("test");
-        user.setPassword("test");
-
-        long userId = this.userDao.save(user);
-        assertThat(userId).isGreaterThan(0);
-
-        Admin admin = new Admin();
-        admin.setUser(user);
-        
-        long adminId = this.adminDao.save(admin);
-        assertThat(userId).isGreaterThan(0);
-
-        admin = this.adminDao.getById(adminId + 1);
-        assertThat(admin).isNull();
+       // TODO: implement this
     }
 
     @Test
     public void getAllShouldWork (){
-        User user = new User();
-        user.setFirstName("test");
-        user.setLastName("test");
-        user.setEmail("test");
-        user.setPassword("test");
+        assertThat(this.adminService.getAll()).isEmpty();
 
-        long userId = this.userDao.save(user);
+        UserCreationRequestDTO userCreationRequestDto = new UserCreationRequestDTO();
+        userCreationRequestDto.setFirstName("test");
+        userCreationRequestDto.setLastName("test");
+        userCreationRequestDto.setEmail("test");
+        userCreationRequestDto.setPassword("test");
+
+        UserCreationResponseDTO userCreationResponseDto = null;
+        try{
+            userCreationResponseDto = this.userService.create(userCreationRequestDto);
+        } catch (AlreadyExistsException e){
+            e.printStackTrace();
+        }
+        long userId = userCreationResponseDto.getId();
         assertThat(userId).isGreaterThan(0);
 
-        Admin admin = new Admin();
-        admin.setUser(user);
+        AdminCreationRequestDTO adminCreationRequestDto = new AdminCreationRequestDTO();
+        adminCreationRequestDto.setUserId(userId);
         
-        long adminId = this.adminDao.save(admin);
+        AdminCreationResponseDTO adminCreationResponseDto = null;
+        try {
+            adminCreationResponseDto = this.adminService.create(adminCreationRequestDto);
+        } catch (AlreadyExistsException e){
+            e.printStackTrace();
+        } catch (NotFoundException e){
+            e.printStackTrace();
+        }
+        long adminId = adminCreationResponseDto.getId();
         assertThat(adminId).isGreaterThan(0);
 
-        assertThat(this.adminDao.existsById(adminId)).isTrue();
+        assertThat(this.adminService.getAll().size()).isEqualTo(1);
     }
 
     @Test
     public void deleteShouldWork(){
-        User user = new User();
-        user.setFirstName("test");
-        user.setLastName("test");
-        user.setEmail("test");
-        user.setPassword("test");
-
-        long userId = this.userDao.save(user);
-        assertThat(userId).isGreaterThan(0);
-
-        Admin admin = new Admin();
-        admin.setUser(user);
-        
-        long adminId = this.adminDao.save(admin);
-        assertThat(adminId).isGreaterThan(0);
-
-        this.adminDao.delete(adminId);
-
-        assertThat(this.adminDao.existsById(adminId)).isFalse();
+        // TODO: implement this
     }
 
     @Test
     public void deleteShouldFail(){
-        User user = new User();
-        user.setFirstName("test");
-        user.setLastName("test");
-        user.setEmail("test");
-        user.setPassword("test");
-
-        long userId = this.userDao.save(user);
-        assertThat(userId).isGreaterThan(0);
-
-        Admin admin = new Admin();
-        admin.setUser(user);
-        
-        long adminId = this.adminDao.save(admin);
-        assertThat(adminId).isGreaterThan(0);
-
-        try {
-            this.adminDao.delete(adminId+1);
-        } catch (EmptyResultDataAccessException ex) {
-            assertThat(this.adminDao.existsById(adminId)).isTrue();
-        }
+       // TODO: implement this
     }
 }

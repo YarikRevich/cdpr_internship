@@ -32,6 +32,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Content;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Controller for managing user accounts.
  * 
@@ -41,6 +44,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 @Validated
 @Tag(name = "User")
 public class UserController {
+    Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserService userService;
 
@@ -50,6 +55,7 @@ public class UserController {
         content = @Content(
                 schema=@Schema(implementation = UserCreationRequestDTO.class)))
         @Valid UserCreationRequestDTO userCreationRequestDto) throws AlreadyExistsException {
+        logger.info("POST 'v1/user' is accessed with the following parameters: %s", userCreationRequestDto);
         return this.userService.create(userCreationRequestDto);
     }
 
@@ -59,11 +65,13 @@ public class UserController {
         content = @Content(
                 schema=@Schema(implementation = UserRetrievalRequestDTO.class)))
         @Valid UserRetrievalRequestDTO userRetrievalRequestDto) throws NotFoundException {
+        logger.info("GET 'v1/user' is accessed with the following parameters: %s", userRetrievalRequestDto);
         return this.userService.get(userRetrievalRequestDto);
     }
 
     @GetMapping(value = "v1/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<UserRetrievalResponseDTO> get() throws NotFoundException {
+        logger.info("GET 'v1/users' is accessed");
         return this.userService.getAll();
     }
 
@@ -73,6 +81,7 @@ public class UserController {
         content = @Content(
                 schema=@Schema(implementation = UserUpdateRequestDTO.class)))
         @Valid UserUpdateRequestDTO userUpdateRequestDto) throws NotFoundException {
+        logger.info("PUT 'v1/user' is accessed with the following parameters: %s", userUpdateRequestDto);
         this.userService.update(userUpdateRequestDto); 
     }
 
@@ -82,6 +91,7 @@ public class UserController {
         content = @Content(
                 schema=@Schema(implementation = UserDeleteRequestDTO.class)))
         @Valid UserDeleteRequestDTO userDeleteRequestDto) throws NotFoundException {
+        logger.info("DELETE 'v1/user' is accessed with the following parameters: %s", userDeleteRequestDto);
         this.userService.delete(userDeleteRequestDto);
     }
 }

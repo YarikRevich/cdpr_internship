@@ -58,7 +58,7 @@ public class CartDAO {
     };
 
     /**
-     * Retrieves a Cart entity by the attached Cart.
+     * Retrieves a Cart entity by the attached User.
      * 
      * @param user The attached User of the Cart entity to retrieve.
      * @return The Cart entity with the attached Cart.

@@ -5,15 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.gamestore.dao.CartDAO;
-import com.gamestore.dao.GameDAO;
 import com.gamestore.dao.OrderDAO;
+import com.gamestore.dto.CartItemRetrievalResponseDTO;
 import com.gamestore.dto.CartRetrievalResponseDTO;
-import com.gamestore.dto.GameCreationRequestDTO;
-import com.gamestore.dto.GameCreationResponseDTO;
-import com.gamestore.dto.GameDeleteRequestDTO;
-import com.gamestore.dto.GameRetrievalRequestDTO;
 import com.gamestore.dto.GameRetrievalResponseDTO;
-import com.gamestore.dto.GameUpdateRequestDTO;
 import com.gamestore.dto.GenreRetrievalResponseDTO;
 import com.gamestore.dto.OrderCreationRequestDTO;
 import com.gamestore.dto.OrderCreationResponseDTO;
@@ -22,7 +17,6 @@ import com.gamestore.dto.OrderRetrievalRequestDTO;
 import com.gamestore.dto.OrderRetrievalResponseDTO;
 import com.gamestore.dto.UserRetrievalResponseDTO;
 import com.gamestore.entity.Cart;
-import com.gamestore.entity.Game;
 import com.gamestore.entity.Order;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
@@ -69,24 +63,42 @@ public class OrderService {
         List<Order> orders = this.orderDao.getAll();
 
         return orders.stream()
-            .map(order -> new OrderRetrievalResponseDTO(
-                order.getId(), 
+        .map(order -> new OrderRetrievalResponseDTO(
+            order.getId(), 
+            new CartRetrievalResponseDTO(
+                order.getCart().getId(),
                 new UserRetrievalResponseDTO(
                     order.getCart().getUser().getId(), 
                     order.getCart().getUser().getFirstName(),
                     order.getCart().getUser().getLastName(),
                     order.getCart().getUser().getEmail(),
-                    order.getCart().getUser().getPassword()),
-                new CartRetrievalResponseDTO(
-                    order.getCart().getId(), 
+                    order.getCart().getUser().getPassword()
+                ),
+                order.getCart().getCartItems().stream()
+                .map(cartItem -> new CartItemRetrievalResponseDTO(
+                    cartItem.getId(),
                     new UserRetrievalResponseDTO(
-                        order.getCart().getUser().getId(), 
-                        order.getCart().getUser().getFirstName(),
-                        order.getCart().getUser().getLastName(),
-                        order.getCart().getUser().getEmail(),
-                        order.getCart().getUser().getPassword())), 
-                order.getCreationTime()))
-            .collect(Collectors.toList());
+                        cartItem.getUser().getId(), 
+                        cartItem.getUser().getFirstName(),
+                        cartItem.getUser().getLastName(),
+                        cartItem.getUser().getEmail(),
+                        cartItem.getUser().getPassword()
+                    ),
+                    new GameRetrievalResponseDTO(
+                        cartItem.getGame().getId(), 
+                        cartItem.getGame().getName(), 
+                        cartItem.getGame().getGenres().stream().map(genre -> new GenreRetrievalResponseDTO(
+                            genre.getId(), 
+                            genre.getName()))
+                        .collect(Collectors.toList()), 
+                        cartItem.getGame().getPrice(), 
+                        cartItem.getGame().getAvailableQuantity()
+                    ),
+                    cartItem.getQuantity()))
+                .collect(Collectors.toList())
+            ),
+            order.getCreationTime()))
+        .collect(Collectors.toList());
     }
 
     public void delete(OrderDeleteRequestDTO orderDeleteRequestDto)throws NotFoundException {

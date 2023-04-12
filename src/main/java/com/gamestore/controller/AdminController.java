@@ -52,7 +52,7 @@ public class AdminController {
         @RequestBody(description = "AdminCreationRequest", required = true,
                     content = @Content(
                             schema=@Schema(implementation = AdminCreationRequestDTO.class))) 
-        @Valid AdminCreationRequestDTO adminCreationRequestDto) throws AlreadyExistsException {
+        @Valid AdminCreationRequestDTO adminCreationRequestDto) throws AlreadyExistsException, NotFoundException {
         logger.info("POST 'v1/admin' is accessed with the following parameters: %s", adminCreationRequestDto);
         return this.adminService.create(adminCreationRequestDto);
     }
@@ -79,6 +79,7 @@ public class AdminController {
                     content = @Content(
                             schema=@Schema(implementation = AdminDeleteRequestDTO.class))) 
         @Valid AdminDeleteRequestDTO adminDeleteRequestDto) throws NotFoundException {
+        logger.info("DELETE 'v1/admin' is accessed with the following parameters: %s", adminDeleteRequestDto);
         this.adminService.delete(adminDeleteRequestDto);
     }
 }

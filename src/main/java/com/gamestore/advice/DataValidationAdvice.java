@@ -13,6 +13,11 @@ import com.gamestore.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Advice for managing data validation exceptions.
+ * 
+ * @author YarikRevich
+ */
 @ControllerAdvice
 public class DataValidationAdvice {
     Logger logger = LoggerFactory.getLogger(DataValidationAdvice.class);

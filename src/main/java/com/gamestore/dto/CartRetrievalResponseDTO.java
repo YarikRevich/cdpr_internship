@@ -23,6 +23,6 @@ public class CartRetrievalResponseDTO {
     private UserRetrievalResponseDTO user;
 
     @NonNull
-    @JsonProperty("genres")
+    @JsonProperty("cart_items")
     private List<CartItemRetrievalResponseDTO> cartItems;
 }

@@ -1,12 +1,13 @@
 package com.gamestore.dto;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import jakarta.validation.constraints.Min;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.gamestore.entity.Cart;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
@@ -17,6 +18,7 @@ import lombok.NonNull;
 @Getter
 @ToString
 @NoArgsConstructor
+@AllArgsConstructor
 public class OrderRetrievalResponseDTO {
     @Min(value = 0, message = "")
     @JsonProperty("id")
@@ -28,5 +30,5 @@ public class OrderRetrievalResponseDTO {
 
     @NonNull
     @JsonProperty("creation_time")
-    private LocalTime creationTime;
+    private LocalDateTime creationTime;
 }

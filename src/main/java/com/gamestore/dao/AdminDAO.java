@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
 import com.gamestore.entity.Admin;
+import com.gamestore.entity.User;
 import com.gamestore.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -51,6 +52,28 @@ public class AdminDAO {
      */
     public boolean existsById(long id) throws EntityNotFoundException{
         return this.adminRepository.existsById(id);
+    };
+
+    /**
+     * Retrieves a Admin entity by the attached User.
+     * 
+     * @param user The attached User of the Admin entity to retrieve.
+     * @return The Cart entity with the attached Admin.
+     * @throws EntityNotFoundException If the Admin entity is not found.
+     */
+    public Admin getByUser(User user) throws EntityNotFoundException {
+        return this.adminRepository.findByUser(user);
+    }
+
+    /**
+     * Checks if a Admin entity exists in the database by its name.
+     * 
+     * @param user The User entity to check.
+     * @return True if the Admin entity exists, false otherwise.
+     * @throws EntityNotFoundException If the Admin entity is not found.
+     */
+    public boolean existsByUser(User user) throws EntityNotFoundException {
+        return this.adminRepository.existsByUser(user);
     };
 
     /**

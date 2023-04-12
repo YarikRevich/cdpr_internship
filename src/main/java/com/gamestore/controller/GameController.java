@@ -25,6 +25,8 @@ import com.gamestore.service.GameService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -40,6 +42,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 @Validated
 @Tag(name = "Game")
 public class GameController {
+    Logger logger = LoggerFactory.getLogger(GameController.class);
+
     @Autowired
     private GameService gameService;
 
@@ -49,6 +53,7 @@ public class GameController {
                     content = @Content(
                             schema=@Schema(implementation = GameCreationRequestDTO.class)))
         @Valid GameCreationRequestDTO gameCreationRequestDto) throws AlreadyExistsException {
+        logger.info("POST 'v1/game' is accessed with the following parameters: %s", gameCreationRequestDto);
         return this.gameService.create(gameCreationRequestDto);
     }
 
@@ -58,11 +63,13 @@ public class GameController {
                     content = @Content(
                             schema=@Schema(implementation = GameRetrievalRequestDTO.class)))
         @Valid GameRetrievalRequestDTO gameRetrievalRequestDto) throws NotFoundException {
+        logger.info("GET 'v1/game' is accessed with the following parameters: %s", gameRetrievalRequestDto);
         return this.gameService.get(gameRetrievalRequestDto);
     }
 
     @GetMapping(value = "v1/games", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<GameRetrievalResponseDTO> get() throws NotFoundException {
+        logger.info("GET 'v1/games' is accessed");
         return this.gameService.getAll();
     }
 
@@ -72,6 +79,7 @@ public class GameController {
                     content = @Content(
                             schema=@Schema(implementation = GameUpdateRequestDTO.class)))
         @Valid GameUpdateRequestDTO gameUpdateRequestDto) throws NotFoundException {
+        logger.info("PUT 'v1/game' is accessed with the following parameters: %s", gameUpdateRequestDto);
         this.gameService.update(gameUpdateRequestDto); 
     }
 
@@ -81,6 +89,7 @@ public class GameController {
                     content = @Content(
                             schema=@Schema(implementation = GameDeleteRequestDTO.class)))
         @Valid GameDeleteRequestDTO gameDeleteRequestDto) throws NotFoundException {
+        logger.info("DELETE 'v1/game' is accessed with the following parameters: %s", gameDeleteRequestDto);
         this.gameService.delete(gameDeleteRequestDto);
     }
 }

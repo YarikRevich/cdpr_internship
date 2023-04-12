@@ -8,10 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToOne;
 import javax.persistence.JoinColumn;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import java.io.Serializable;
 
@@ -27,7 +26,7 @@ public class Order implements Serializable{
     private Cart cart;
 
     @Column(name = "creation_time", nullable = false)
-    private LocalTime creationTime;
+    private LocalDateTime creationTime;
 
     public long getId() {
         return this.id;
@@ -45,11 +44,11 @@ public class Order implements Serializable{
         this.cart = cart;
     }
 
-    public LocalTime getCreationTime(){
+    public LocalDateTime getCreationTime(){
         return this.creationTime;
     }
 
-    public void setCreationTime(LocalTime creationTime) {
+    public void setCreationTime(LocalDateTime creationTime) {
         this.creationTime = creationTime;
     }
 }

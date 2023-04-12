@@ -27,6 +27,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Content;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Controller for managing account orders.
@@ -37,6 +39,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 @Validated
 @Tag(name = "Order")
 public class OrderController {
+    Logger logger = LoggerFactory.getLogger(OrderController.class);
+
     @Autowired
     private OrderService orderService;
 
@@ -46,6 +50,7 @@ public class OrderController {
                     content = @Content(
                             schema=@Schema(implementation = OrderCreationRequestDTO.class)))
         @Valid OrderCreationRequestDTO orderCreationRequestDto) throws AlreadyExistsException, NotFoundException {
+        logger.info("POST 'v1/order' is accessed with the following parameters: %s", orderCreationRequestDto);
         return this.orderService.create(orderCreationRequestDto);
     }
 
@@ -55,11 +60,13 @@ public class OrderController {
         content = @Content(
                 schema=@Schema(implementation = OrderRetrievalRequestDTO.class)))
         @Valid OrderRetrievalRequestDTO orderRetrievalRequestDTo) throws NotFoundException {
+        logger.info("GET 'v1/order' is accessed with the following parameters: %s", orderRetrievalRequestDTo);
         return this.orderService.get(orderRetrievalRequestDTo);
     }
 
     @GetMapping(value = "v1/orders", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<OrderRetrievalResponseDTO> get() throws NotFoundException {
+        logger.info("GET 'v1/orders' is accessed");
         return this.orderService.getAll();
     }
 
@@ -69,6 +76,7 @@ public class OrderController {
         content = @Content(
                 schema=@Schema(implementation = OrderDeleteRequestDTO.class)))
         @Valid OrderDeleteRequestDTO orderDeleteRequestDto) throws NotFoundException {
+        logger.info("DELETE 'v1/order' is accessed with the following parameters: %s", orderDeleteRequestDto);
         this.orderService.delete(orderDeleteRequestDto);
     }
 }

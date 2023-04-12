@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -37,6 +39,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 @Validated
 @Tag(name = "Genre")
 public class GenreController {
+    Logger logger = LoggerFactory.getLogger(GenreController.class);
+
     @Autowired
     private GenreService genreService;
 
@@ -46,6 +50,7 @@ public class GenreController {
                     content = @Content(
                             schema=@Schema(implementation = GenreCreationRequestDTO.class)))
         @Valid GenreCreationRequestDTO genreCreationRequestDto) throws AlreadyExistsException {
+        logger.info("POST 'v1/genre' is accessed with the following parameters: %s", genreCreationRequestDto);
         return this.genreService.create(genreCreationRequestDto); 
     }
 
@@ -55,11 +60,13 @@ public class GenreController {
         content = @Content(
                 schema=@Schema(implementation = GenreRetrievalRequestDTO.class)))
         @Valid GenreRetrievalRequestDTO genreRetrievalRequestDto) throws NotFoundException {
+        logger.info("GET 'v1/genre' is accessed with the following parameters: %s", genreRetrievalRequestDto);
         return this.genreService.get(genreRetrievalRequestDto); 
     }
 
     @GetMapping(value = "v1/genres", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<GenreRetrievalResponseDTO> get(){
+        logger.info("GET 'v1/genres' is accessed");
         return this.genreService.getAll();
     }
 
@@ -69,6 +76,7 @@ public class GenreController {
         content = @Content(
                 schema=@Schema(implementation = GenreDeleteRequestDTO.class)))
         @Valid GenreDeleteRequestDTO genreDeleteRequestDto) throws NotFoundException {
+        logger.info("DELETE 'v1/genre' is accessed with the following parameters: %s", genreDeleteRequestDto);
         this.genreService.delete(genreDeleteRequestDto); 
     }
 }
