@@ -4,17 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.gamestore.dao.UserDAO;
 import com.gamestore.dto.AdminCreationRequestDTO;
 import com.gamestore.dto.AdminCreationResponseDTO;
 import com.gamestore.dto.UserCreationRequestDTO;
 import com.gamestore.dto.UserCreationResponseDTO;
-import com.gamestore.entity.Admin;
-import com.gamestore.entity.User;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
 
@@ -22,10 +18,10 @@ import com.gamestore.exception.NotFoundException;
 @DataJpaTest(properties = "spring.sql.init.mode=never")
 public class AdminServiceTest {
     @Autowired
-    AdminService adminService;
+    private AdminService adminService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Test
     public void createShouldWork() {

@@ -52,8 +52,10 @@ public class GameController {
         @RequestBody(description = "GameCreationRequest", required = true,
                     content = @Content(
                             schema=@Schema(implementation = GameCreationRequestDTO.class)))
-        @Valid GameCreationRequestDTO gameCreationRequestDto) throws AlreadyExistsException {
-        logger.info("POST 'v1/game' is accessed with the following parameters: %s", gameCreationRequestDto);
+        @Valid 
+        @org.springframework.web.bind.annotation.RequestBody
+        GameCreationRequestDTO gameCreationRequestDto) throws AlreadyExistsException {
+        logger.info("POST 'v1/game' is accessed with the following parameters: {}", gameCreationRequestDto);
         return this.gameService.create(gameCreationRequestDto);
     }
 
@@ -63,7 +65,7 @@ public class GameController {
                     content = @Content(
                             schema=@Schema(implementation = GameRetrievalRequestDTO.class)))
         @Valid GameRetrievalRequestDTO gameRetrievalRequestDto) throws NotFoundException {
-        logger.info("GET 'v1/game' is accessed with the following parameters: %s", gameRetrievalRequestDto);
+        logger.info("GET 'v1/game' is accessed with the following parameters: {}", gameRetrievalRequestDto);
         return this.gameService.get(gameRetrievalRequestDto);
     }
 
@@ -78,8 +80,10 @@ public class GameController {
         @RequestBody(description = "GameUpdateRequest", required = true,
                     content = @Content(
                             schema=@Schema(implementation = GameUpdateRequestDTO.class)))
-        @Valid GameUpdateRequestDTO gameUpdateRequestDto) throws NotFoundException {
-        logger.info("PUT 'v1/game' is accessed with the following parameters: %s", gameUpdateRequestDto);
+        @Valid 
+        @org.springframework.web.bind.annotation.RequestBody
+        GameUpdateRequestDTO gameUpdateRequestDto) throws NotFoundException {
+        logger.info("PUT 'v1/game' is accessed with the following parameters: {}", gameUpdateRequestDto);
         this.gameService.update(gameUpdateRequestDto); 
     }
 
@@ -89,7 +93,7 @@ public class GameController {
                     content = @Content(
                             schema=@Schema(implementation = GameDeleteRequestDTO.class)))
         @Valid GameDeleteRequestDTO gameDeleteRequestDto) throws NotFoundException {
-        logger.info("DELETE 'v1/game' is accessed with the following parameters: %s", gameDeleteRequestDto);
+        logger.info("DELETE 'v1/game' is accessed with the following parameters: {}", gameDeleteRequestDto);
         this.gameService.delete(gameDeleteRequestDto);
     }
 }

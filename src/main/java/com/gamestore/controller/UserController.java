@@ -19,7 +19,6 @@ import com.gamestore.dto.UserDeleteRequestDTO;
 import com.gamestore.dto.UserRetrievalRequestDTO;
 import com.gamestore.dto.UserRetrievalResponseDTO;
 import com.gamestore.dto.UserUpdateRequestDTO;
-import com.gamestore.entity.User;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
 import com.gamestore.service.UserService;
@@ -54,8 +53,10 @@ public class UserController {
         @RequestBody(description = "UserCreationRequest", required = true,
         content = @Content(
                 schema=@Schema(implementation = UserCreationRequestDTO.class)))
-        @Valid UserCreationRequestDTO userCreationRequestDto) throws AlreadyExistsException {
-        logger.info("POST 'v1/user' is accessed with the following parameters: %s", userCreationRequestDto);
+        @Valid 
+        @org.springframework.web.bind.annotation.RequestBody
+        UserCreationRequestDTO userCreationRequestDto) throws AlreadyExistsException {
+        logger.info("POST 'v1/user' is accessed with the following parameters: {}", userCreationRequestDto);
         return this.userService.create(userCreationRequestDto);
     }
 
@@ -65,7 +66,7 @@ public class UserController {
         content = @Content(
                 schema=@Schema(implementation = UserRetrievalRequestDTO.class)))
         @Valid UserRetrievalRequestDTO userRetrievalRequestDto) throws NotFoundException {
-        logger.info("GET 'v1/user' is accessed with the following parameters: %s", userRetrievalRequestDto);
+        logger.info("GET 'v1/user' is accessed with the following parameters: {}", userRetrievalRequestDto);
         return this.userService.get(userRetrievalRequestDto);
     }
 
@@ -80,8 +81,10 @@ public class UserController {
         @RequestBody(description = "UserUpdateRequest", required = true,
         content = @Content(
                 schema=@Schema(implementation = UserUpdateRequestDTO.class)))
-        @Valid UserUpdateRequestDTO userUpdateRequestDto) throws NotFoundException {
-        logger.info("PUT 'v1/user' is accessed with the following parameters: %s", userUpdateRequestDto);
+        @Valid 
+        @org.springframework.web.bind.annotation.RequestBody
+        UserUpdateRequestDTO userUpdateRequestDto) throws NotFoundException {
+        logger.info("PUT 'v1/user' is accessed with the following parameters: {}", userUpdateRequestDto);
         this.userService.update(userUpdateRequestDto); 
     }
 
@@ -91,7 +94,7 @@ public class UserController {
         content = @Content(
                 schema=@Schema(implementation = UserDeleteRequestDTO.class)))
         @Valid UserDeleteRequestDTO userDeleteRequestDto) throws NotFoundException {
-        logger.info("DELETE 'v1/user' is accessed with the following parameters: %s", userDeleteRequestDto);
+        logger.info("DELETE 'v1/user' is accessed with the following parameters: {}", userDeleteRequestDto);
         this.userService.delete(userDeleteRequestDto);
     }
 }

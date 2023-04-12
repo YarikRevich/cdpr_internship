@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.MediaType;
@@ -52,8 +51,10 @@ public class AdminController {
         @RequestBody(description = "AdminCreationRequest", required = true,
                     content = @Content(
                             schema=@Schema(implementation = AdminCreationRequestDTO.class))) 
-        @Valid AdminCreationRequestDTO adminCreationRequestDto) throws AlreadyExistsException, NotFoundException {
-        logger.info("POST 'v1/admin' is accessed with the following parameters: %s", adminCreationRequestDto);
+        @Valid 
+        @org.springframework.web.bind.annotation.RequestBody
+        AdminCreationRequestDTO adminCreationRequestDto) throws AlreadyExistsException, NotFoundException {
+        logger.info("POST 'v1/admin' is accessed with the following parameters: {}", adminCreationRequestDto);
         return this.adminService.create(adminCreationRequestDto);
     }
 
@@ -63,7 +64,7 @@ public class AdminController {
                     content = @Content(
                             schema=@Schema(implementation = AdminRetrievalRequestDTO.class))) 
         @Valid AdminRetrievalRequestDTO adminRetrievalRequestDto) throws NotFoundException {
-        logger.info("GET 'v1/admin' is accessed with the following parameters: %s", adminRetrievalRequestDto);
+        logger.info("GET 'v1/admin' is accessed with the following parameters: {}", adminRetrievalRequestDto);
         return this.adminService.get(adminRetrievalRequestDto);
     }
 
@@ -79,7 +80,7 @@ public class AdminController {
                     content = @Content(
                             schema=@Schema(implementation = AdminDeleteRequestDTO.class))) 
         @Valid AdminDeleteRequestDTO adminDeleteRequestDto) throws NotFoundException {
-        logger.info("DELETE 'v1/admin' is accessed with the following parameters: %s", adminDeleteRequestDto);
+        logger.info("DELETE 'v1/admin' is accessed with the following parameters: {}", adminDeleteRequestDto);
         this.adminService.delete(adminDeleteRequestDto);
     }
 }

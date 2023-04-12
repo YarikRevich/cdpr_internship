@@ -15,10 +15,10 @@ import com.gamestore.entity.User;
 @DataJpaTest(properties = "spring.sql.init.mode=never")
 public class AdminDAOTest {
     @Autowired
-    AdminDAO adminDao;
+    private AdminDAO adminDao;
 
     @Autowired
-    UserDAO userDao;
+    private UserDAO userDao;
 
     @Test
     public void saveShouldWork(){

@@ -49,8 +49,10 @@ public class GenreController {
         @RequestBody(description = "GenreCreationRequest", required = true,
                     content = @Content(
                             schema=@Schema(implementation = GenreCreationRequestDTO.class)))
-        @Valid GenreCreationRequestDTO genreCreationRequestDto) throws AlreadyExistsException {
-        logger.info("POST 'v1/genre' is accessed with the following parameters: %s", genreCreationRequestDto);
+        @Valid 
+        @org.springframework.web.bind.annotation.RequestBody
+        GenreCreationRequestDTO genreCreationRequestDto) throws AlreadyExistsException {
+        logger.info("POST 'v1/genre' is accessed with the following parameters: {}", genreCreationRequestDto);
         return this.genreService.create(genreCreationRequestDto); 
     }
 
@@ -60,7 +62,7 @@ public class GenreController {
         content = @Content(
                 schema=@Schema(implementation = GenreRetrievalRequestDTO.class)))
         @Valid GenreRetrievalRequestDTO genreRetrievalRequestDto) throws NotFoundException {
-        logger.info("GET 'v1/genre' is accessed with the following parameters: %s", genreRetrievalRequestDto);
+        logger.info("GET 'v1/genre' is accessed with the following parameters: {}", genreRetrievalRequestDto);
         return this.genreService.get(genreRetrievalRequestDto); 
     }
 
@@ -76,7 +78,7 @@ public class GenreController {
         content = @Content(
                 schema=@Schema(implementation = GenreDeleteRequestDTO.class)))
         @Valid GenreDeleteRequestDTO genreDeleteRequestDto) throws NotFoundException {
-        logger.info("DELETE 'v1/genre' is accessed with the following parameters: %s", genreDeleteRequestDto);
+        logger.info("DELETE 'v1/genre' is accessed with the following parameters: {}", genreDeleteRequestDto);
         this.genreService.delete(genreDeleteRequestDto); 
     }
 }

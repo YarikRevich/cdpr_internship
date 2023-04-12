@@ -49,8 +49,10 @@ public class OrderController {
         @RequestBody(description = "OrderCreationRequest", required = true,
                     content = @Content(
                             schema=@Schema(implementation = OrderCreationRequestDTO.class)))
-        @Valid OrderCreationRequestDTO orderCreationRequestDto) throws AlreadyExistsException, NotFoundException {
-        logger.info("POST 'v1/order' is accessed with the following parameters: %s", orderCreationRequestDto);
+        @Valid 
+        @org.springframework.web.bind.annotation.RequestBody
+        OrderCreationRequestDTO orderCreationRequestDto) throws AlreadyExistsException, NotFoundException {
+        logger.info("POST 'v1/order' is accessed with the following parameters: {}", orderCreationRequestDto);
         return this.orderService.create(orderCreationRequestDto);
     }
 
@@ -60,7 +62,7 @@ public class OrderController {
         content = @Content(
                 schema=@Schema(implementation = OrderRetrievalRequestDTO.class)))
         @Valid OrderRetrievalRequestDTO orderRetrievalRequestDTo) throws NotFoundException {
-        logger.info("GET 'v1/order' is accessed with the following parameters: %s", orderRetrievalRequestDTo);
+        logger.info("GET 'v1/order' is accessed with the following parameters: {}", orderRetrievalRequestDTo);
         return this.orderService.get(orderRetrievalRequestDTo);
     }
 
@@ -76,7 +78,7 @@ public class OrderController {
         content = @Content(
                 schema=@Schema(implementation = OrderDeleteRequestDTO.class)))
         @Valid OrderDeleteRequestDTO orderDeleteRequestDto) throws NotFoundException {
-        logger.info("DELETE 'v1/order' is accessed with the following parameters: %s", orderDeleteRequestDto);
+        logger.info("DELETE 'v1/order' is accessed with the following parameters: {}", orderDeleteRequestDto);
         this.orderService.delete(orderDeleteRequestDto);
     }
 }
