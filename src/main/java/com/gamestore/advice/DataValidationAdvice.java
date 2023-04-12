@@ -10,12 +10,18 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @ControllerAdvice
 public class DataValidationAdvice {
+    Logger logger = LoggerFactory.getLogger(DataValidationAdvice.class);
+
     @ResponseBody
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     String handleNotFoundException(NotFoundException ex) {
+      logger.error(ex.getMessage());
       return ex.getMessage();
     }
 
@@ -23,6 +29,7 @@ public class DataValidationAdvice {
     @ExceptionHandler(AlreadyExistsException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     String handleAlreadyExistsException(AlreadyExistsException ex) {
+      logger.error(ex.getMessage());
       return ex.getMessage();
     }
 
@@ -30,6 +37,7 @@ public class DataValidationAdvice {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     String handleMissingServletRequestParameterException(MissingServletRequestParameterException ex) {
+      logger.error(ex.getMessage());
       return ex.getMessage();
     }
 }

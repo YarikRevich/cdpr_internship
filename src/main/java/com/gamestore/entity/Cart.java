@@ -31,7 +31,7 @@ public class Cart implements Serializable {
 
     @OneToOne(
         mappedBy = "cart", 
-        cascade = CascadeType.ALL,
+        cascade = CascadeType.PERSIST,
         orphanRemoval = true)
     Order order;
 

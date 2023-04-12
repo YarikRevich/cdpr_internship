@@ -1,7 +1,5 @@
 package com.gamestore.dto;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -14,7 +12,7 @@ import lombok.ToString;
 @Getter
 @ToString
 @AllArgsConstructor
-public class CartRetrievalResponseDTO {
+public class CartItemRetrievalResponseDTO {
     @JsonProperty("id")
     private long id;
 
@@ -23,6 +21,14 @@ public class CartRetrievalResponseDTO {
     private UserRetrievalResponseDTO user;
 
     @NonNull
-    @JsonProperty("genres")
-    private List<CartItemRetrievalResponseDTO> cartItems;
+    @JsonProperty("game")
+    private GameRetrievalResponseDTO game;
+
+    @JsonProperty("quantity")
+    private int quantity;
 }
+
+ 
+
+
+

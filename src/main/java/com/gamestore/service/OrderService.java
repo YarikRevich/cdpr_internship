@@ -1,39 +1,99 @@
 package com.gamestore.service;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import com.gamestore.dao.CartDAO;
+import com.gamestore.dao.GameDAO;
 import com.gamestore.dao.OrderDAO;
-import com.gamestore.dao.UserDAO;
+import com.gamestore.dto.CartRetrievalResponseDTO;
+import com.gamestore.dto.GameCreationRequestDTO;
+import com.gamestore.dto.GameCreationResponseDTO;
+import com.gamestore.dto.GameDeleteRequestDTO;
+import com.gamestore.dto.GameRetrievalRequestDTO;
+import com.gamestore.dto.GameRetrievalResponseDTO;
+import com.gamestore.dto.GameUpdateRequestDTO;
+import com.gamestore.dto.GenreRetrievalResponseDTO;
+import com.gamestore.dto.OrderCreationRequestDTO;
+import com.gamestore.dto.OrderCreationResponseDTO;
+import com.gamestore.dto.OrderDeleteRequestDTO;
+import com.gamestore.dto.OrderRetrievalRequestDTO;
+import com.gamestore.dto.OrderRetrievalResponseDTO;
+import com.gamestore.dto.UserRetrievalResponseDTO;
+import com.gamestore.entity.Cart;
 import com.gamestore.entity.Game;
-import com.gamestore.entity.User;
-// import com.gamestore.practicaltask.dao.ProductDAO;
-// import com.gamestore.practicaltask.entity.dto.BuyProductWrapper;
 import com.gamestore.entity.Order;
+import com.gamestore.exception.AlreadyExistsException;
+import com.gamestore.exception.NotFoundException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class OrderService {
-    // @Autowired
-    // private OrderDAO orderDao;
+    @Autowired
+    private OrderDAO orderDao;
 
-    // public ArrayList<Game> getAllProductsByUserId(long id) throws Exception {
-    //     return transactionDao.getAllProductsByUserId(id);
-    // }
+    @Autowired
+    private CartDAO cartDao;
 
-    // public ArrayList<User> getAllUsersByProductId(long id) throws Exception {
-    //     return transactionDao.getAllUsersByProductId(id);  
-    // }
+    public OrderCreationResponseDTO create(OrderCreationRequestDTO orderCreationRequestDto) throws AlreadyExistsException, NotFoundException {
+        if (this.cartDao.existsById(orderCreationRequestDto.getCartId())){
+            Cart cart = cartDao.getById(orderCreationRequestDto.getCartId());
+            if (!this.orderDao.existsByCart(cart)){
+                Order order = new Order();
+                order.setCart(cart);
+                order.setCreationTime(LocalDateTime.now());
+                
+                long id = this.orderDao.save(order);
 
-    // /**
-    //  * Creates buyProduct transaction and decreases money amount of the user
-    //  * @param userId id of the user
-    //  * @param productId id of the product
-    //  */
-    // public void buyProduct(BuyProductWrapper buyProductWrapper) throws Exception{
-    //     transactionDao.createTransaction(buyProductWrapper.getUserId(), buyProductWrapper.getProductId());
-    //     int userMoneyAmount = userDao.getUserMoneyAmount(buyProductWrapper.getUserId());
-    //     int productPrice = productDao.getProductPrice(buyProductWrapper.getProductId());
-    //     userDao.setUserMoneyAmount(buyProductWrapper.getUserId(), userMoneyAmount-productPrice);
-    // }
+                OrderCreationResponseDTO orderCreationResponseDto = new OrderCreationResponseDTO();
+                orderCreationResponseDto.setId(id);
+
+                return orderCreationResponseDto;
+            } else {
+                throw new AlreadyExistsException("Order for the given cart already exists");
+            }
+        } else {
+            throw new NotFoundException("Cart with the given id does not exist");
+        }
+    }
+
+    public OrderRetrievalResponseDTO get(OrderRetrievalRequestDTO orderRetrievalRequestDto) throws NotFoundException {
+        // TODO: implement this
+        return null;
+    }
+
+    public List<OrderRetrievalResponseDTO> getAll(){
+        List<Order> orders = this.orderDao.getAll();
+
+        return orders.stream()
+            .map(order -> new OrderRetrievalResponseDTO(
+                order.getId(), 
+                new UserRetrievalResponseDTO(
+                    order.getCart().getUser().getId(), 
+                    order.getCart().getUser().getFirstName(),
+                    order.getCart().getUser().getLastName(),
+                    order.getCart().getUser().getEmail(),
+                    order.getCart().getUser().getPassword()),
+                new CartRetrievalResponseDTO(
+                    order.getCart().getId(), 
+                    new UserRetrievalResponseDTO(
+                        order.getCart().getUser().getId(), 
+                        order.getCart().getUser().getFirstName(),
+                        order.getCart().getUser().getLastName(),
+                        order.getCart().getUser().getEmail(),
+                        order.getCart().getUser().getPassword())), 
+                order.getCreationTime()))
+            .collect(Collectors.toList());
+    }
+
+    public void delete(OrderDeleteRequestDTO orderDeleteRequestDto)throws NotFoundException {
+        if (this.orderDao.existsById(orderDeleteRequestDto.getId())){
+            this.orderDao.delete(orderDeleteRequestDto.getId());
+        } else {
+            throw new NotFoundException("Order with the given id does not exist");
+        }   
+    } 
 }

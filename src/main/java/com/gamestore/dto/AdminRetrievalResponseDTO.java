@@ -12,6 +12,12 @@ import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+/**
+ * Data Transfer Object (DTO) for Admin retrieval response.
+ * Contains the id of the admin and a UserRetrievalResponseDTO object representing the user associated with the admin.
+ * 
+ * @author YarikRevich
+ */
 @Data
 @Getter
 @ToString

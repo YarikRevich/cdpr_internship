@@ -7,6 +7,11 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.NoArgsConstructor;
 
+/**
+ * Data transfer object representing the response from creating a new admin account.
+ * 
+ * @author YarikRevich
+ */
 @Data
 @Getter
 @ToString

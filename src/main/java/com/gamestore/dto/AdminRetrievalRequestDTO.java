@@ -9,6 +9,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+/**
+ * Data transfer object representing a request to retrieve an admin account with a specified ID.
+ * 
+ * @author YarikRevich
+ */
 @Data
 @Getter
 @ToString

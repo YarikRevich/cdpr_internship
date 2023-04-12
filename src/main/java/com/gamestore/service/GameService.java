@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.gamestore.dao.GameDAO;
-import com.gamestore.dao.UserDAO;
 import com.gamestore.dto.GameCreationRequestDTO;
 import com.gamestore.dto.GameCreationResponseDTO;
 import com.gamestore.dto.GameDeleteRequestDTO;
@@ -12,16 +11,12 @@ import com.gamestore.dto.GameRetrievalRequestDTO;
 import com.gamestore.dto.GameRetrievalResponseDTO;
 import com.gamestore.dto.GameUpdateRequestDTO;
 import com.gamestore.dto.GenreRetrievalResponseDTO;
-import com.gamestore.dto.UserCreationRequestDTO;
 import com.gamestore.entity.Game;
-import com.gamestore.entity.User;
 import com.gamestore.exception.AlreadyExistsException;
 import com.gamestore.exception.NotFoundException;
 
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class GameService {

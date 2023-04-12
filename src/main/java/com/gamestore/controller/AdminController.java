@@ -30,6 +30,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Content;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Controller for managing admin accounts.
  * 
@@ -39,6 +42,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 @Validated
 @Tag(name = "Admin")
 public class AdminController {
+    Logger logger = LoggerFactory.getLogger(AdminController.class);
+
     @Autowired
     private AdminService adminService;
 
@@ -48,6 +53,7 @@ public class AdminController {
                     content = @Content(
                             schema=@Schema(implementation = AdminCreationRequestDTO.class))) 
         @Valid AdminCreationRequestDTO adminCreationRequestDto) throws AlreadyExistsException {
+        logger.info("POST 'v1/admin' is accessed with the following parameters: %s", adminCreationRequestDto);
         return this.adminService.create(adminCreationRequestDto);
     }
 
@@ -57,11 +63,13 @@ public class AdminController {
                     content = @Content(
                             schema=@Schema(implementation = AdminRetrievalRequestDTO.class))) 
         @Valid AdminRetrievalRequestDTO adminRetrievalRequestDto) throws NotFoundException {
+        logger.info("GET 'v1/admin' is accessed with the following parameters: %s", adminRetrievalRequestDto);
         return this.adminService.get(adminRetrievalRequestDto);
     }
 
     @GetMapping(value = "v1/admins", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody List<AdminRetrievalResponseDTO> get() throws NotFoundException {
+        logger.info("GET 'v1/admins' is accessed");
         return this.adminService.getAll();
     }
 

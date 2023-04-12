@@ -24,7 +24,7 @@ public class OrderRetrievalResponseDTO {
 
     @NonNull
     @JsonProperty("cart")
-    private Cart cart;
+    private CartRetrievalResponseDTO cart;
 
     @NonNull
     @JsonProperty("creation_time")

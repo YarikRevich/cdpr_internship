@@ -1,4 +1,4 @@
-// package com.gamestore.advice;
+package com.gamestore.advice;
 
 // import java.io.IOException;
 // import java.io.Serializable;
