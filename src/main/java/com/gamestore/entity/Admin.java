@@ -8,7 +8,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.OneToOne;
-import javax.persistence.CascadeType;
 
 import java.io.Serializable;
 

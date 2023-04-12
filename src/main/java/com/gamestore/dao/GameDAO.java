@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
 import com.gamestore.entity.Game;
+import com.gamestore.entity.Genre;
 
 import org.springframework.stereotype.Component;
 
@@ -64,6 +65,19 @@ public class GameDAO {
      */
     public boolean existsByName(String name) throws EntityNotFoundException {
         return this.gameRepository.existsByName(name);
+    };
+
+    /**
+     * Checks if a Game entity exists in the database by the given filter.
+     * 
+     * @param name The name of the Game entity to check.
+     * @param priceLowerThan The highest price of the Game entity to check.
+     * @param priceGreaterThan The lowest price of the Game entity to check.
+     * @return True if the Game entity exists, false otherwise.
+     * @throws EntityNotFoundException If the Game entity is not found.
+     */
+    public boolean existsByFilters(String name, int priceLowerThan, int priceGreaterThan) throws EntityNotFoundException {
+        return this.gameRepository.existsByFilters(name, priceLowerThan, priceGreaterThan);
     };
 
     /**

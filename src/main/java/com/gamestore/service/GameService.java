@@ -43,13 +43,8 @@ public class GameService {
     }
 
     public GameRetrievalResponseDTO get(GameRetrievalRequestDTO gameRetrievalRequestDto) throws NotFoundException {
-        System.out.println(gameRetrievalRequestDto);
+        // TODO: implement this
         return null;
-        // if (this.gameDao.existsById(id)){
-        //     return this.gameDao.getById(id);
-        // } else {
-        //     throw new NotFoundException("Game with the given id does not exist");
-        // }
     }
 
     public List<GameRetrievalResponseDTO> getAll(){
