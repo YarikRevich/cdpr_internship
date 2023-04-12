@@ -1,101 +1,102 @@
 package com.gamestore.dao;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 
-import com.gamestore.repository.UserRepository;
+import javax.persistence.EntityNotFoundException;
+
 import com.gamestore.repository.GameRepository;
 import com.gamestore.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-// import com.gamestore.util.exception.NotEnoughMoneyToBuyProductException;
-// import com.gamestore.util.exception.ProductNotFoundException;
-// import com.gamestore.util.exception.UserNotFoundException;
 
-import com.gamestore.entity.User;
-import com.gamestore.entity.Game;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+
+import com.gamestore.entity.Cart;
+import com.gamestore.entity.Order;
 import com.gamestore.entity.Order;
 
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
+/**
+ * Service layer for Order entities.
+ * 
+ * @author YarikRevich
+ */
 @Component
 public class OrderDAO {
-    // @Autowired
-    // private GameRepository productRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
-    // @Autowired
-    // private UserRepository userRepository;
+    /**
+     * Saves a Order entity to the database.
+     * 
+     * @param order The Order entity to be saved.
+     * @return The ID of the saved Order entity.
+     */
+    public long save(Order order) {
+        Order result = this.orderRepository.save(order);
+        return result.getId();
+    }
 
-    // @Autowired
-    // private OrderRepository transactionRepository;
+    /**
+     * Retrieves a Order entity by its ID.
+     * 
+     * @param id The ID of the Order entity to retrieve.
+     * @return The Order entity with the specified ID.
+     * @throws EntityNotFoundException If the Order entity is not found.
+     */
+    public Order getById(long id) throws EntityNotFoundException {
+        return this.orderRepository.findById(id);
+    }
 
-    //   /**
-    //  * Displays all the products bought by certain user
-    //  * @param id id of the user
-    //  * @return list of products bought by user with certain id
-    //  */
-    // public ArrayList<Game> getAllProductsByUserId(long id) throws Exception{
-    //     User user = null;
-    //     if (userRepository.existsById(id)){
-    //         user = userRepository.getReferenceById(id);
-    //     } else {
-    //         throw new NotFoundException();
-    //     }
-    //     ArrayList<Game> products = new ArrayList<>();
+    /**
+     * Checks if a Order entity exists in the database by its ID.
+     * 
+     * @param id The ID of the Order entity to check.
+     * @return True if the Order entity exists, false otherwise.
+     * @throws EntityNotFoundException If the Order entity is not found.
+     */
+    public boolean existsById(long id) throws EntityNotFoundException {
+        return this.orderRepository.existsById(id);
+    };
 
-    //     ArrayList<Order> transactions = new ArrayList<>(transactionRepository.findAllByUser(user));
-    //     for (Order transaction : transactions){
-    //         products.add(transaction.getProduct());
-    //     }
+    /**
+     * Retrieves a Order entity by the attached Cart.
+     * 
+     * @param id The attached Cart of the Order entity to retrieve.
+     * @return The Order entity with the attached Cart.
+     * @throws EntityNotFoundException If the Order entity is not found.
+     */
+    public Order getByCart(Cart cart) throws EntityNotFoundException {
+        return this.orderRepository.findByCart(cart);
+    }
 
-    //     return products;
-    // }
+    /**
+     * Checks if a Order entity exists in the database by its name.
+     * 
+     * @param cart The Order entity to check.
+     * @return True if the Order entity exists, false otherwise.
+     * @throws EntityNotFoundException If the Order entity is not found.
+     */
+    public boolean existsByCart(Cart cart) throws EntityNotFoundException {
+        return this.orderRepository.existsByCart(cart);
+    };
 
-    // /**
-    //  * Displays a list of users bought certain product
-    //  * @param id id of the product
-    //  * @return list of users bought product with certain id 
-    //  */
-    // public ArrayList<User> getAllUsersByProductId(long id) throws Exception{
-    //     Game product = null;
-    //     if (productRepository.existsById(id)){
-    //         product = productRepository.getById(id);
-    //     } else {
-    //         throw new ProductNotFoundException();
-    //     }
-    //     ArrayList<User> users = new ArrayList<>();
+    /**
+     * Retrieves a list of all Order entities from the database.
+     * 
+     * @return A list of all Order entities, sorted by ID in ascending order.
+     */
+    public List<Order> getAll() {
+        return this.orderRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
+    }
 
-    //     ArrayList<Order> transactions = new ArrayList<>(transactionRepository.findAllByProduct(product));
-    //     for (Order transaction : transactions){
-    //         users.add(transaction.getUser());
-    //     }
-
-    //     return users;
-    // }
-
-    // public void createTransaction(long userId, long productId) throws Exception{
-    //     User user = null;
-    //     if (userRepository.existsById(userId)){
-    //         user = userRepository.getById(userId);
-    //     } else {
-    //         throw new NotFoundException();
-    //     }
-    //     Game product = null;
-    //     if (productRepository.existsById(productId)){
-    //         product = productRepository.getById(productId);
-    //     } else {
-    //         throw new ProductNotFoundException();
-    //     }
-    //     if (user.getMoneyAmount() < product.getPrice()){
-    //         throw new NotEnoughMoneyToBuyProductException();
-    //     }
-    //     Order transaction = new Order();
-    //     transaction.setUser(user);
-    //     transaction.setProduct(product);
-    //     transactionRepository.save(transaction);
-
-    //     user.setMoneyAmount(user.getMoneyAmount() - product.getPrice());
-    //     userRepository.save(user);
-    // }
+    /**
+     * Deletes a Order entity from the database by its ID.
+     * 
+     * @param id The ID of the Order entity to delete.
+     * @throws EntityNotFoundException If the Order entity is not found.
+     */
+    public void delete(long id) throws EntityNotFoundException {
+        this.orderRepository.deleteById(id);
+    }
 }

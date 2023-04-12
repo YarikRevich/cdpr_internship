@@ -3,6 +3,7 @@ package com.gamestore.entity;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -24,7 +25,7 @@ public class CartItem {
     @JoinColumn(name = "users_id")
     private User user;
  
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "games_id")
     private Game game;
 

@@ -9,10 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -34,6 +36,12 @@ public class Game implements Serializable {
 
     @Column(name = "available_quantity", nullable = false)
     private int availableQuantity;
+
+    @OneToMany(
+        mappedBy = "game", 
+        cascade = CascadeType.ALL,
+        orphanRemoval = true)
+    private List<CartItem> cartItems = new ArrayList<CartItem>();
 
     public long getId() {
         return this.id;

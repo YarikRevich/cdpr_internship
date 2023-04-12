@@ -7,7 +7,6 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -27,6 +26,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Content;
+
+/**
+ * Controller for managing admin accounts.
+ * 
+ * @author YarikRevich
+ */
 @RestController
 @Validated
 @Tag(name = "Admin")
@@ -35,12 +43,20 @@ public class AdminController {
     private AdminService adminService;
 
     @PostMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody AdminCreationResponseDTO create(@Valid @RequestBody AdminCreationRequestDTO adminCreationRequestDto) throws AlreadyExistsException {
+    public @ResponseBody AdminCreationResponseDTO create(
+        @RequestBody(description = "AdminCreationRequest", required = true,
+                    content = @Content(
+                            schema=@Schema(implementation = AdminCreationRequestDTO.class))) 
+        @Valid AdminCreationRequestDTO adminCreationRequestDto) throws AlreadyExistsException {
         return this.adminService.create(adminCreationRequestDto);
     }
 
     @GetMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody AdminRetrievalResponseDTO get(@Valid AdminRetrievalRequestDTO adminRetrievalRequestDto) throws NotFoundException {
+    public @ResponseBody AdminRetrievalResponseDTO get(
+        @RequestBody(description = "AdminRetrievalRequest", required = true,
+                    content = @Content(
+                            schema=@Schema(implementation = AdminRetrievalRequestDTO.class))) 
+        @Valid AdminRetrievalRequestDTO adminRetrievalRequestDto) throws NotFoundException {
         return this.adminService.get(adminRetrievalRequestDto);
     }
 
@@ -50,7 +66,11 @@ public class AdminController {
     }
 
     @DeleteMapping(value = "v1/admin", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody void delete(@Valid AdminDeleteRequestDTO adminDeleteRequestDto) throws NotFoundException {
+    public @ResponseBody void delete(
+        @RequestBody(description = "AdminDeleteRequest", required = true,
+                    content = @Content(
+                            schema=@Schema(implementation = AdminDeleteRequestDTO.class))) 
+        @Valid AdminDeleteRequestDTO adminDeleteRequestDto) throws NotFoundException {
         this.adminService.delete(adminDeleteRequestDto);
     }
 }

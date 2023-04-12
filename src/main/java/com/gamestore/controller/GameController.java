@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.MediaType;
@@ -28,6 +27,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.media.Content;
+
+/**
+ * Controller for managing game cataloge.
+ * 
+ * @author YarikRevich
+ */
 @RestController
 @Validated
 @Tag(name = "Game")
@@ -36,12 +44,20 @@ public class GameController {
     private GameService gameService;
 
     @PostMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody GameCreationResponseDTO create(@RequestBody @Valid GameCreationRequestDTO gameCreationRequestDto) throws AlreadyExistsException {
+    public @ResponseBody GameCreationResponseDTO create(
+        @RequestBody(description = "GameCreationRequest", required = true,
+                    content = @Content(
+                            schema=@Schema(implementation = GameCreationRequestDTO.class)))
+        @Valid GameCreationRequestDTO gameCreationRequestDto) throws AlreadyExistsException {
         return this.gameService.create(gameCreationRequestDto);
     }
 
     @GetMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody GameRetrievalResponseDTO get(@Valid GameRetrievalRequestDTO gameRetrievalRequestDto) throws NotFoundException {
+    public @ResponseBody GameRetrievalResponseDTO get(
+        @RequestBody(description = "GameRetrievalRequest", required = true,
+                    content = @Content(
+                            schema=@Schema(implementation = GameRetrievalRequestDTO.class)))
+        @Valid GameRetrievalRequestDTO gameRetrievalRequestDto) throws NotFoundException {
         return this.gameService.get(gameRetrievalRequestDto);
     }
 
@@ -51,12 +67,20 @@ public class GameController {
     }
 
     @PutMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@Valid @RequestBody GameUpdateRequestDTO gameUpdateRequestDto) throws NotFoundException {
+    public void update(
+        @RequestBody(description = "GameUpdateRequest", required = true,
+                    content = @Content(
+                            schema=@Schema(implementation = GameUpdateRequestDTO.class)))
+        @Valid GameUpdateRequestDTO gameUpdateRequestDto) throws NotFoundException {
         this.gameService.update(gameUpdateRequestDto); 
     }
 
     @DeleteMapping(value = "v1/game", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody void delete(@Valid GameDeleteRequestDTO gameDeleteRequestDto) throws NotFoundException {
+    public @ResponseBody void delete(
+        @RequestBody(description = "GameDeleteRequest", required = true,
+                    content = @Content(
+                            schema=@Schema(implementation = GameDeleteRequestDTO.class)))
+        @Valid GameDeleteRequestDTO gameDeleteRequestDto) throws NotFoundException {
         this.gameService.delete(gameDeleteRequestDto);
     }
 }
