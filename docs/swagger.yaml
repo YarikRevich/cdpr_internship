@@ -1,0 +1,913 @@
+openapi: 3.0.1
+info:
+  title: Game store API
+  version: '1.0'
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+paths:
+  /v1/user:
+    get:
+      tags:
+        - User
+      operationId: get_1
+      parameters:
+        - name: userRetrievalRequestDto
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/UserRetrievalRequestDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserRetrievalResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    put:
+      tags:
+        - User
+      operationId: update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    post:
+      tags:
+        - User
+      operationId: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreationRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserCreationResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    delete:
+      tags:
+        - User
+      operationId: delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDeleteRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1/game:
+    get:
+      tags:
+        - Game
+      operationId: get_7
+      parameters:
+        - name: gameRetrievalRequestDto
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/GameRetrievalRequestDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameRetrievalResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    put:
+      tags:
+        - Game
+      operationId: update_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameUpdateRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    post:
+      tags:
+        - Game
+      operationId: create_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameCreationRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameCreationResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    delete:
+      tags:
+        - Game
+      operationId: delete_3
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GameDeleteRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1/order:
+    get:
+      tags:
+        - Order
+      operationId: get_3
+      parameters:
+        - name: orderRetrievalRequestDTo
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/OrderRetrievalRequestDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderRetrievalResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    post:
+      tags:
+        - Order
+      operationId: create_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderCreationResponseDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderCreationResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    delete:
+      tags:
+        - Order
+      operationId: delete_1
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderDeleteRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1/genre:
+    get:
+      tags:
+        - Genre
+      operationId: get_5
+      parameters:
+        - name: genreRetrievalRequestDto
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/GenreRetrievalRequestDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreRetrievalResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    post:
+      tags:
+        - Genre
+      operationId: create_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenreCreationRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreCreationResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    delete:
+      tags:
+        - Genre
+      operationId: delete_2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenreDeleteRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1/admin:
+    get:
+      tags:
+        - Admin
+      operationId: get_9
+      parameters:
+        - name: adminRetrievalRequestDto
+          in: query
+          required: true
+          schema:
+            $ref: '#/components/schemas/AdminRetrievalRequestDTO'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminRetrievalResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    post:
+      tags:
+        - Admin
+      operationId: create_4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminCreationRequestDTO'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminCreationResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+    delete:
+      tags:
+        - Admin
+      operationId: delete_4
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminDeleteRequestDTO'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1/users:
+    get:
+      tags:
+        - User
+      operationId: get
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserRetrievalResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1/orders:
+    get:
+      tags:
+        - Order
+      operationId: get_2
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderRetrievalResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1/genres:
+    get:
+      tags:
+        - Genre
+      operationId: get_4
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GenreRetrievalResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1/games:
+    get:
+      tags:
+        - Game
+      operationId: get_6
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GameRetrievalResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+  /v1/admins:
+    get:
+      tags:
+        - Admin
+      operationId: get_8
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdminRetrievalResponseDTO'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                type: string
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                type: string
+components:
+  schemas:
+    UserUpdateRequestDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    GameUpdateRequestDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+        price:
+          type: integer
+          format: int32
+        available_quantity:
+          type: integer
+          format: int32
+    Genre:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    UserCreationRequestDTO:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    UserCreationResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    OrderCreationResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    GenreCreationRequestDTO:
+      type: object
+      properties:
+        name:
+          type: string
+    GenreCreationResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    GameCreationRequestDTO:
+      type: object
+      properties:
+        name:
+          type: string
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+        price:
+          type: integer
+          format: int32
+        available_quantity:
+          type: integer
+          format: int32
+    GameCreationResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    AdminCreationRequestDTO:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          format: int64
+    AdminCreationResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    UserRetrievalResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    UserRetrievalRequestDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    Cart:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user:
+          $ref: '#/components/schemas/User'
+        cartItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItem'
+    CartItem:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+        game:
+          $ref: '#/components/schemas/Game'
+        quantity:
+          type: integer
+          format: int32
+    Game:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+        price:
+          type: integer
+          format: int32
+        availableQuantity:
+          type: integer
+          format: int32
+    LocalTime:
+      type: object
+      properties:
+        hour:
+          type: integer
+          format: int32
+        minute:
+          type: integer
+          format: int32
+        second:
+          type: integer
+          format: int32
+        nano:
+          type: integer
+          format: int32
+    OrderRetrievalResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        cart:
+          $ref: '#/components/schemas/Cart'
+        creation_time:
+          $ref: '#/components/schemas/LocalTime'
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    OrderRetrievalRequestDTO:
+      type: object
+    GenreRetrievalResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+    GenreRetrievalRequestDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    GameRetrievalResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenreRetrievalResponseDTO'
+        price:
+          type: integer
+          format: int32
+        available_quantity:
+          type: integer
+          format: int32
+    GameRetrievalRequestDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+        price_lt:
+          type: integer
+          format: int32
+        price_gt:
+          type: integer
+          format: int32
+        available_quantity:
+          type: integer
+          format: int32
+        available_quantity_lt:
+          type: integer
+          format: int32
+        available_quantity_gt:
+          type: integer
+          format: int32
+    AdminRetrievalResponseDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        user:
+          $ref: '#/components/schemas/UserRetrievalResponseDTO'
+    AdminRetrievalRequestDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    UserDeleteRequestDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    OrderDeleteRequestDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    GenreDeleteRequestDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    GameDeleteRequestDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    AdminDeleteRequestDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
